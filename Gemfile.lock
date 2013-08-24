@@ -79,6 +79,8 @@ GEM
     rake (10.1.0)
     rdoc (3.12.2)
       json (~> 1.4)
+    rebay (1.2.0)
+      json
     ruby-hmac (0.4.0)
     sass (3.2.10)
     sass-rails (4.0.0)
@@ -121,6 +123,7 @@ DEPENDENCIES
   jbuilder (~> 1.2)
   jquery-rails
   rails (= 4.0.0)
+  rebay
   sass-rails (~> 4.0.0)
   sdoc
   sqlite3

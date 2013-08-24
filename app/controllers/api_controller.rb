@@ -3,41 +3,33 @@ require 'nokogiri'
 
 class ApiController < ApplicationController
   def lookup
-    if (params[:id].length === 12)
-      id_type = 'UPC'
+    search_params = {id: params[:id]}
+
+    if params[:id].length === 12
+      search_params[:id_type] = 'UPC'
+      search_params[:country] = 'us'
     elsif (params[:id].length === 13)
-      id_type = 'EAN'
+      search_params[:id_type] = 'EAN'
+      search_params[:country] = 'uk'
     end
 
-    res = Amazon::Ecs.item_lookup(params[:id], {
-      id_type: id_type,
-      search_index: 'All',
-      response_group: 'ItemAttributes,Images,Offers'
-    })
+    amazon_info = get_amazon_info(search_params)
+    ebay_info = get_ebay_info(search_params)
+    general_info = amazon_info.nil? ? ebay_info : amazon_info
 
-    puts res.doc
-
-    item = res.items[0]
-    image = item.get_element('MediumImage')
-    item_attributes = item.get_element('ItemAttributes')
-
-    title = item_attributes.get('Title')
-    platform = item_attributes.get('Platform')
-
-    item_info = get_metacritic_info(title, platform)
-
-    render :json => item_info.merge({
-      title: title,
-      platform: platform,
-      image_url: image.get('URL'),
-      image_width: image.get('Width'),
-      image_height: image.get('Height'),
-      amazon_id: item.get('ASIN'),
-      amazon_price: item.get_element('OfferSummary').get_element('LowestNewPrice').get('FormattedPrice')
-    })
+    if general_info.nil?
+      render :json => nil, :status => 404
+    else
+      item_info = get_metacritic_info(general_info[:title], general_info[:platform])
+      render :json => item_info.merge(general_info)
+    end
   end
 
   private
+
+  EBAY_PLATFORMS = {
+    "Sony Playstation 3" => "PlayStation 3"
+  }
 
   METACRITIC_PLATFORMS = {
     "PlayStation 3" => 1,
@@ -60,9 +52,63 @@ class ApiController < ApplicationController
 
   METACRITIC_SEARCH_URL = "http://www.metacritic.com/search/game/%s/results?plats[%s]=1&search_type=advanced"
 
+  def get_amazon_info(params)
+    res = Amazon::Ecs.item_lookup(params[:id], {
+      id_type: params[:id_type],
+      search_index: 'All',
+      response_group: 'ItemAttributes,Images,Offers',
+      country: params[:country]
+    })
+
+    return nil if res.has_error?
+
+    item = res.items[0]
+    image = item.get_element('MediumImage')
+    item_attributes = item.get_element('ItemAttributes')
+
+    return {
+      title: item_attributes.get('Title').gsub(/-.*/, '').gsub(/\(.*?\)/, '').strip,
+      platform: item_attributes.get('Platform'),
+      image_url: image.get('URL'),
+      image_width: image.get('Width'),
+      image_height: image.get('Height'),
+      offer: {
+        price: item.get_element('OfferSummary').get_element('LowestNewPrice').get('FormattedPrice'),
+        url: 'http://www.amazon.com/dp/'+item.get('ASIN')
+      }
+    }
+  end
+
+  def get_ebay_info(params)
+    res = Rebay::Shopping.new.find_products({
+      :"ProductID.Value" => params[:id],
+      :"ProductID.type" => params[:id_type],
+      :"IncludeSelector" => 'Details'
+    })
+
+    return nil if res.failure?
+
+    details = res.response["Product"]
+    reference_id = details["ProductID"].find{ |item| item["Type"] == 'Reference' }["Value"]
+    specifics = details["ItemSpecifics"]["NameValueList"]
+
+    platform = specifics.find{ |item| item["Name"] == 'Platform' }["Value"]
+    platform = ApiController::EBAY_PLATFORMS[platform] if ApiController::EBAY_PLATFORMS.has_key?(platform)
+
+    return {
+      title: specifics.find{ |item| item["Name"] == 'Game' }["Value"],
+      platform: platform,
+      image_url: details["StockPhotoURL"],
+      offer: {
+        price: 0,
+        url: 'http://www.ebay.com/ctg/'+reference_id
+      }
+    }
+  end
+
   def get_metacritic_info(title, platform)
     search_url = sprintf(ApiController::METACRITIC_SEARCH_URL, title, ApiController::METACRITIC_PLATFORMS[platform])
-    search_results = Net::HTTP.get(URI.parse(URI.escape(search_url.sub(' ', '+'), '[]')));
+    search_results = Net::HTTP.get(URI.parse(URI.escape(search_url.gsub(' ', '+'), '[]')));
 
     doc = Nokogiri::HTML(search_results)
     first_result = doc.at_css('li.first_result')

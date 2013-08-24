@@ -25,5 +25,9 @@ module MediaCriticServer
       :AWS_access_key_id => 'AKIAIX2FSICCF6LXY4VA',
       :AWS_secret_key => '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'
     }
+
+    Rebay::Api.configure do |rebay|
+        rebay.app_id = 'KirillLe-cf21-4352-b4a0-2dd677a4021e'
+    end
   end
 end
