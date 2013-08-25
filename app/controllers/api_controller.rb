@@ -122,7 +122,12 @@ class ApiController < ApplicationController
     if game.nil?
       search_url = sprintf(ApiController::METACRITIC_SEARCH_URL, title, ApiController::METACRITIC_PLATFORMS[platform])
       search_html = retrieve_url(search_url)
-      url = Nokogiri::HTML(search_html).at_css('li.first_result').at_css('.product_title a')['href']
+      search_doc = Nokogiri::HTML(search_html)
+      search_result = search_doc.css('.search_results .result').select do |result|
+        result.at_css('.product_title a').content == title
+      end.first
+      search_result = search_doc.at_css('.search_results .first_result') if search_result.nil?
+      url = search_result.at_css('.product_title a')['href']
       game = Game.create(name: title, platform: platform, metacritic_url: url)
     end
 
@@ -130,6 +135,8 @@ class ApiController < ApplicationController
     game_page = CachedPage.where(url: game_url).first
     if game_page.nil?
       game_html = retrieve_url(game_url)
+      #some pages on metacritic contain invalid UTF-8 sequences
+      game_html = game_html.force_encoding("utf-8").encode("utf-8", "binary", :undef => :replace)
       game_page = CachedPage.create(url: game_url, content: game_html)
     end
 
@@ -143,14 +150,17 @@ class ApiController < ApplicationController
       publisher: game_doc.at_css('.product_data .publisher .data a').content.strip,
       metacritic_url: game.metacritic_url,
       critic_reviews: game_doc.css('.critic_reviews .review').map do |review|
+        link = review.at_css('.full_review a')
+        date = review.at_css('.review_critic .date')
         {
           name: review.at_css('.review_critic a').content,
-          date: review.at_css('.review_critic .date').content,
+          date: date.nil? ? nil : date.content,
           score: review.at_css('.review_grade').content.strip,
           content: review.at_css('.review_body').content.strip,
-          link: review.at_css('.full_review a')['href']
+          link: link.nil? ? nil : link['href']
         }
       end,
+      critic_reviews_total: game_doc.at_css('.product_scores .metascore_summary .count a span').content,
       user_reviews: game_doc.css('.user_reviews .review').map do |review|
         if review.at_css('.blurb_etc').nil?
           content = review.at_css('.review_body').content.strip
@@ -158,11 +168,12 @@ class ApiController < ApplicationController
           content = review.at_css('.blurb_collapsed').content + review.at_css('.blurb_expanded').content
         end
         {
-          name: review.at_css('.review_critic a').content,
+          name: review.at_css('.review_critic a, .review_critic span').content,
           score: review.at_css('.review_grade').content.strip,
           content: content
         }
-      end
+      end,
+      user_reviews_total: game_doc.at_css('.product_scores .feature_userscore .count a').content.split(' ', 2).first
     }
   end
 end
