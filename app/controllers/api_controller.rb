@@ -13,9 +13,13 @@ class ApiController < ApplicationController
       search_params[:country] = 'uk'
     end
 
+    offers = []
     amazon_info = get_amazon_info(search_params)
+    offers.push( amazon_info.delete(:offer) ) if amazon_info
     ebay_info = get_ebay_info(search_params)
+    offers.push( ebay_info.delete(:offer) ) if ebay_info
     general_info = amazon_info.nil? ? ebay_info : amazon_info
+    general_info[:offers] = offers
 
     if general_info.nil?
       render :json => nil, :status => 404
@@ -27,30 +31,9 @@ class ApiController < ApplicationController
 
   private
 
-  EBAY_PLATFORMS = {
-    "Sony Playstation 3" => "PlayStation 3"
-  }
-
-  METACRITIC_PLATFORMS = {
-    "PlayStation 3" => 1,
-    "Xbox 360" => 2,
-    "PC" => 3,
-    "DS" => 4,
-    "3DS" => 16,
-    "PlayStation Vita" => 67365,
-    "PSP" => 7,
-    "Wii" => 8,
-    "Wii U" => 68410,
-    "PlayStation 2" => 6,
-    "PlayStation" => 10,
-    "Game Boy Advance" => 11,
-    "Xbox" => 12,
-    "GameCube" => 13,
-    "Nintendo 64" => 14,
-    "Dreamcast" => 15
-  }
-
-  METACRITIC_SEARCH_URL = "http://www.metacritic.com/search/game/%s/results?plats[%s]=1&search_type=advanced"
+  def retrieve_url(url)
+    return Net::HTTP.get(URI.parse(URI.escape(url.gsub(' ', '+'), '[]')))
+  end
 
   def get_amazon_info(params)
     res = Amazon::Ecs.item_lookup(params[:id], {
@@ -73,11 +56,16 @@ class ApiController < ApplicationController
       image_width: image.get('Width'),
       image_height: image.get('Height'),
       offer: {
+        name: 'Amazon',
         price: item.get_element('OfferSummary').get_element('LowestNewPrice').get('FormattedPrice'),
         url: 'http://www.amazon.com/dp/'+item.get('ASIN')
       }
     }
   end
+
+  EBAY_PLATFORMS = {
+    "Sony Playstation 3" => "PlayStation 3"
+  }
 
   def get_ebay_info(params)
     res = Rebay::Shopping.new.find_products({
@@ -98,27 +86,83 @@ class ApiController < ApplicationController
     return {
       title: specifics.find{ |item| item["Name"] == 'Game' }["Value"],
       platform: platform,
-      image_url: details["StockPhotoURL"],
+      image_url: details["StockPhotoURL"].sub('_6', '_7'),
       offer: {
-        price: 0,
+        name: 'eBay',
+        price: '$'+sprintf("%0.02f", res.response["ItemArray"]["Item"][0]["ConvertedCurrentPrice"]["Value"]),
         url: 'http://www.ebay.com/ctg/'+reference_id
       }
     }
   end
 
-  def get_metacritic_info(title, platform)
-    search_url = sprintf(ApiController::METACRITIC_SEARCH_URL, title, ApiController::METACRITIC_PLATFORMS[platform])
-    search_results = Net::HTTP.get(URI.parse(URI.escape(search_url.gsub(' ', '+'), '[]')));
+  METACRITIC_PLATFORMS = {
+    "PlayStation 3" => 1,
+    "Xbox 360" => 2,
+    "PC" => 3,
+    "DS" => 4,
+    "3DS" => 16,
+    "PlayStation Vita" => 67365,
+    "PSP" => 7,
+    "Wii" => 8,
+    "Wii U" => 68410,
+    "PlayStation 2" => 6,
+    "PlayStation" => 10,
+    "Game Boy Advance" => 11,
+    "Xbox" => 12,
+    "GameCube" => 13,
+    "Nintendo 64" => 14,
+    "Dreamcast" => 15
+  }
 
-    doc = Nokogiri::HTML(search_results)
-    first_result = doc.at_css('li.first_result')
+  METACRITIC_BASE_URL = "http://www.metacritic.com"
+  METACRITIC_SEARCH_URL = METACRITIC_BASE_URL + "/search/game/%s/results?plats[%s]=1&search_type=advanced"
+
+  def get_metacritic_info(title, platform)
+    game = Game.where(name: title, platform: platform).first
+    if game.nil?
+      search_url = sprintf(ApiController::METACRITIC_SEARCH_URL, title, ApiController::METACRITIC_PLATFORMS[platform])
+      search_html = retrieve_url(search_url)
+      url = Nokogiri::HTML(search_html).at_css('li.first_result').at_css('.product_title a')['href']
+      game = Game.create(name: title, platform: platform, metacritic_url: url)
+    end
+
+    game_url = ApiController::METACRITIC_BASE_URL + game.metacritic_url
+    game_page = CachedPage.where(url: game_url).first
+    if game_page.nil?
+      game_html = retrieve_url(game_url)
+      game_page = CachedPage.create(url: game_url, content: game_html)
+    end
+
+    game_doc = Nokogiri::HTML(game_page.content)
 
     return {
-      score: first_result.at_css('.std_score .metascore').content,
-      release_date: first_result.at_css('.release_date .data').content,
-      maturity_rating: first_result.at_css('.maturity_rating .data').content,
-      publisher: first_result.at_css('.publisher .data').content,
-      metacritic_url: first_result.at_css('.product_title a')['href']
+      score: game_doc.at_css('.product_scores .metascore .score_value').content,
+      user_score: game_doc.at_css('.product_scores .avguserscore .score_value').content,
+      release_date: game_doc.at_css('.product_data .release_data .data').content,
+      maturity_rating: game_doc.at_css('.product_details .product_rating .data').content,
+      publisher: game_doc.at_css('.product_data .publisher .data a').content.strip,
+      metacritic_url: game.metacritic_url,
+      critic_reviews: game_doc.css('.critic_reviews .review').map do |review|
+        {
+          name: review.at_css('.review_critic a').content,
+          date: review.at_css('.review_critic .date').content,
+          score: review.at_css('.review_grade').content.strip,
+          content: review.at_css('.review_body').content.strip,
+          link: review.at_css('.full_review a')['href']
+        }
+      end,
+      user_reviews: game_doc.css('.user_reviews .review').map do |review|
+        if review.at_css('.blurb_etc').nil?
+          content = review.at_css('.review_body').content.strip
+        else
+          content = review.at_css('.blurb_collapsed').content + review.at_css('.blurb_expanded').content
+        end
+        {
+          name: review.at_css('.review_critic a').content,
+          score: review.at_css('.review_grade').content.strip,
+          content: content
+        }
+      end
     }
   end
 end
