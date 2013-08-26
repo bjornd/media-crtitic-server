@@ -11,20 +11,53 @@ class ApiController < ApplicationController
     elsif (params[:id].length === 13)
       search_params[:id_type] = 'EAN'
       search_params[:country] = 'uk'
+    else
+      render :json => '', :status => 404
+      return
     end
 
     offers = []
+    titles = []
     amazon_info = get_amazon_info(search_params)
-    offers.push( amazon_info.delete(:offer) ) if amazon_info
+    if !amazon_info.nil?
+      offers.push( amazon_info.delete(:offer) )
+      titles.push( amazon_info[:title] )
+    end
     ebay_info = get_ebay_info(search_params)
-    offers.push( ebay_info.delete(:offer) ) if ebay_info
-    general_info = amazon_info.nil? ? ebay_info : amazon_info
-    general_info[:offers] = offers
+    if !ebay_info.nil?
+      offers.push( ebay_info.delete(:offer) )
+      titles.push( ebay_info[:title] )
+    end
 
-    if general_info.nil?
-      render :json => nil, :status => 404
+    general_info = amazon_info.nil? ? ebay_info : amazon_info
+
+    if !general_info.nil?
+      general_info[:offers] = offers
+      titles.uniq!
+      game = Game.where(name: titles, platform: general_info[:platform]).take
+      if game.nil?
+        url = nil
+        title = titles.find do |title|
+          search_url = sprintf(ApiController::METACRITIC_SEARCH_URL, title, ApiController::METACRITIC_PLATFORMS[general_info[:platform]])
+          search_html = retrieve_url(search_url)
+          search_doc = Nokogiri::HTML(search_html)
+          search_result = search_doc.css('.search_results .result').select do |result|
+            result.at_css('.product_title a').content == title
+          end.first
+          search_result = search_doc.at_css('.search_results .first_result') if search_result.nil?
+          url = search_result.at_css('.product_title a')['href'] if !search_result.nil?
+        end
+        game = Game.create(name: title, platform: general_info[:platform], metacritic_url: url) if url
+      end
     else
-      item_info = get_metacritic_info(general_info[:title], general_info[:platform])
+      game = nil
+    end
+
+    if game.nil?
+      render :json => '', :status => 404
+    else
+      general_info[:title] = game.name
+      item_info = get_metacritic_info(game)
       render :json => item_info.merge(general_info)
     end
   end
@@ -86,7 +119,7 @@ class ApiController < ApplicationController
     return {
       title: specifics.find{ |item| item["Name"] == 'Game' }["Value"],
       platform: platform,
-      image_url: details["StockPhotoURL"].sub('_6', '_7'),
+      image_url: details["StockPhotoURL"] ? details["StockPhotoURL"].sub('_6', '_7') : nil,
       offer: {
         name: 'eBay',
         price: '$'+sprintf("%0.02f", res.response["ItemArray"]["Item"][0]["ConvertedCurrentPrice"]["Value"]),
@@ -117,20 +150,7 @@ class ApiController < ApplicationController
   METACRITIC_BASE_URL = "http://www.metacritic.com"
   METACRITIC_SEARCH_URL = METACRITIC_BASE_URL + "/search/game/%s/results?plats[%s]=1&search_type=advanced"
 
-  def get_metacritic_info(title, platform)
-    game = Game.where(name: title, platform: platform).first
-    if game.nil?
-      search_url = sprintf(ApiController::METACRITIC_SEARCH_URL, title, ApiController::METACRITIC_PLATFORMS[platform])
-      search_html = retrieve_url(search_url)
-      search_doc = Nokogiri::HTML(search_html)
-      search_result = search_doc.css('.search_results .result').select do |result|
-        result.at_css('.product_title a').content == title
-      end.first
-      search_result = search_doc.at_css('.search_results .first_result') if search_result.nil?
-      url = search_result.at_css('.product_title a')['href']
-      game = Game.create(name: title, platform: platform, metacritic_url: url)
-    end
-
+  def get_metacritic_info(game)
     game_url = ApiController::METACRITIC_BASE_URL + game.metacritic_url
     game_page = CachedPage.where(url: game_url).first
     if game_page.nil?
@@ -142,8 +162,10 @@ class ApiController < ApplicationController
 
     game_doc = Nokogiri::HTML(game_page.content)
 
+    score_el = game_doc.at_css('.product_scores .metascore .score_value')
+
     return {
-      score: game_doc.at_css('.product_scores .metascore .score_value').content,
+      score: score_el.nil? ? nil : score_el.content,
       user_score: game_doc.at_css('.product_scores .avguserscore .score_value').content,
       release_date: game_doc.at_css('.product_data .release_data .data').content,
       maturity_rating: game_doc.at_css('.product_details .product_rating .data').content,
