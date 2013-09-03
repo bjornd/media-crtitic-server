@@ -34,21 +34,7 @@ class ApiController < ApplicationController
     if !general_info.nil?
       general_info[:offers] = offers
       titles.uniq!
-      game = Game.where(name: titles, platform: general_info[:platform]).take
-      if game.nil?
-        url = nil
-        title = titles.find do |title|
-          search_url = sprintf(ApiController::METACRITIC_SEARCH_URL, title, ApiController::METACRITIC_PLATFORMS[general_info[:platform]])
-          search_html = retrieve_url(search_url)
-          search_doc = Nokogiri::HTML(search_html)
-          search_result = search_doc.css('.search_results .result').select do |result|
-            result.at_css('.product_title a').content == title
-          end.first
-          search_result = search_doc.at_css('.search_results .first_result') if search_result.nil?
-          url = search_result.at_css('.product_title a')['href'] if !search_result.nil?
-        end
-        game = Game.create(name: title, platform: general_info[:platform], metacritic_url: url) if url
-      end
+      game = get_game(titles, general_info[:platform])
     else
       game = nil
     end
@@ -62,10 +48,62 @@ class ApiController < ApplicationController
     end
   end
 
+  def search
+    render :json => search_metacritic(params[:query])
+  end
+
   private
 
   def retrieve_url(url)
     return Net::HTTP.get(URI.parse(URI.escape(url.gsub(' ', '+'), '[]')))
+  end
+
+  def search_metacritic(title, platform=nil)
+    search_url = sprintf(
+      ApiController::METACRITIC_SEARCH_URL,
+      title,
+      platform.nil? ? '' : ApiController::METACRITIC_PLATFORMS[platform]
+    )
+    search_doc = Nokogiri::HTML(retrieve_url(search_url))
+    search_doc.css('.search_results .result').map do |result|
+      {
+        title: result.at_css('.product_title a').content,
+        score: result.at_css('.metascore').content,
+        platform: result.at_css('.platform').content,
+        release_date: result.at_css('.release_date .data').content,
+        publisher: result.at_css('.publisher .data').content
+      }
+    end
+  end
+
+  def search_metacritic_one(title, platform)
+    search_url = sprintf(
+      ApiController::METACRITIC_SEARCH_URL,
+      title,
+      platform.nil? ? '' : ApiController::METACRITIC_PLATFORMS[platform]
+    )
+    search_doc = Nokogiri::HTML(retrieve_url(search_url))
+    search_result = search_doc.css('.search_results .result').select do |result|
+      result.at_css('.product_title a').content == title
+    end.first
+    search_result = search_doc.at_css('.search_results .first_result') if search_result.nil?
+    if !search_result.nil?
+      search_result.at_css('.product_title a')['href']
+    else
+      nil
+    end
+  end
+
+  def get_game(titles, platform)
+    game = Game.where(name: titles, platform: platform).take
+    if game.nil?
+      url = nil
+      title = titles.find do |title|
+        url = search_metacritic_one(title, platform)
+      end
+      game = Game.create(name: title, platform: platform, metacritic_url: url) if url
+    end
+    game
   end
 
   def get_amazon_info(params)
@@ -97,7 +135,8 @@ class ApiController < ApplicationController
   end
 
   EBAY_PLATFORMS = {
-    "Sony Playstation 3" => "PlayStation 3"
+    "Sony Playstation 3" => "PlayStation 3",
+    "Microsoft Xbox 360" => "Xbox 360"
   }
 
   def get_ebay_info(params)
@@ -117,7 +156,7 @@ class ApiController < ApplicationController
     platform = ApiController::EBAY_PLATFORMS[platform] if ApiController::EBAY_PLATFORMS.has_key?(platform)
 
     return {
-      title: specifics.find{ |item| item["Name"] == 'Game' }["Value"],
+      title: specifics.find{ |item| item["Name"] == 'Game' }["Value"].gsub(/-.*/, '').gsub(/\(.*?\)/, '').strip,
       platform: platform,
       image_url: details["StockPhotoURL"] ? details["StockPhotoURL"].sub('_6', '_7') : nil,
       offer: {
@@ -163,12 +202,13 @@ class ApiController < ApplicationController
     game_doc = Nokogiri::HTML(game_page.content)
 
     score_el = game_doc.at_css('.product_scores .metascore .score_value')
+    maturity_rating_el = game_doc.at_css('.product_details .product_rating .data')
 
     return {
       score: score_el.nil? ? nil : score_el.content,
       user_score: game_doc.at_css('.product_scores .avguserscore .score_value').content,
       release_date: game_doc.at_css('.product_data .release_data .data').content,
-      maturity_rating: game_doc.at_css('.product_details .product_rating .data').content,
+      maturity_rating: maturity_rating_el.nil? ? nil : maturity_rating_el.content,
       publisher: game_doc.at_css('.product_data .publisher .data a').content.strip,
       metacritic_url: game.metacritic_url,
       critic_reviews: game_doc.css('.critic_reviews .review').map do |review|

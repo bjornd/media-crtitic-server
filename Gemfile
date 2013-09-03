@@ -26,6 +26,11 @@ gem 'jbuilder', '~> 1.2'
 gem 'amazon-ecs'
 gem "rebay"
 
+group :test do
+  gem 'webmock'
+  gem "vcr", "~> 2.5.0"
+end
+
 group :doc do
   # bundle exec rake doc:rails generates the API under doc/api.
   gem 'sdoc', require: false

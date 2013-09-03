@@ -1,0 +1,101 @@
+---
+http_interactions:
+- request:
+    method: get
+    uri: http://ecs.amazonaws.com/onca/xml?AWSAccessKeyId=AKIAIX2FSICCF6LXY4VA&AssociateTag=associate_tag&IdType=UPC&ItemId=111111111111&Operation=ItemLookup&ResponseGroup=ItemAttributes,Images,Offers&SearchIndex=All&Signature=EOP5U3oMsgIpoy4pFN5astesjZfjSspfOKkzTeD8sgw=&Timestamp=2013-08-29T07:53:20Z
+    body:
+      encoding: US-ASCII
+      string: ''
+    headers:
+      Accept-Encoding:
+      - gzip;q=1.0,deflate;q=0.6,identity;q=0.3
+      Accept:
+      - '*/*'
+      User-Agent:
+      - Ruby
+      Host:
+      - ecs.amazonaws.com
+  response:
+    status:
+      code: 200
+      message: OK
+    headers:
+      Date:
+      - Thu, 29 Aug 2013 07:53:20 GMT
+      Server:
+      - Server
+      Content-Type:
+      - text/xml;charset=UTF-8
+      Vary:
+      - Accept-Encoding,User-Agent
+      Nncoection:
+      - close
+      Transfer-Encoding:
+      - chunked
+    body:
+      encoding: UTF-8
+      string: <?xml version="1.0" ?><ItemLookupResponse xmlns="http://webservices.amazon.com/AWSECommerceService/2011-08-01"><OperationRequest><HTTPHeaders><Header
+        Name="UserAgent" Value="Ruby"></Header></HTTPHeaders><RequestId>63d2856d-caef-444c-a983-72c89bfcd94d</RequestId><Arguments><Argument
+        Name="Operation" Value="ItemLookup"></Argument><Argument Name="Signature"
+        Value="EOP5U3oMsgIpoy4pFN5astesjZfjSspfOKkzTeD8sgw="></Argument><Argument
+        Name="AssociateTag" Value="associate_tag"></Argument><Argument Name="ItemId"
+        Value="111111111111"></Argument><Argument Name="IdType" Value="UPC"></Argument><Argument
+        Name="AWSAccessKeyId" Value="AKIAIX2FSICCF6LXY4VA"></Argument><Argument Name="Timestamp"
+        Value="2013-08-29T07:53:20Z"></Argument><Argument Name="ResponseGroup" Value="ItemAttributes,Images,Offers"></Argument><Argument
+        Name="SearchIndex" Value="All"></Argument><Argument Name="Service" Value="AWSECommerceService"></Argument></Arguments><RequestProcessingTime>0.0285390000000000</RequestProcessingTime></OperationRequest><Items><Request><IsValid>True</IsValid><ItemLookupRequest><IdType>UPC</IdType><ItemId>111111111111</ItemId><ResponseGroup>ItemAttributes</ResponseGroup><ResponseGroup>Images</ResponseGroup><ResponseGroup>Offers</ResponseGroup><SearchIndex>All</SearchIndex><VariationPage>All</VariationPage></ItemLookupRequest><Errors><Error><Code>AWS.InvalidParameterValue</Code><Message>111111111111
+        is not a valid value for ItemId. Please change this value and retry your request.</Message></Error></Errors></Request></Items></ItemLookupResponse>
+    http_version: 
+  recorded_at: Thu, 29 Aug 2013 07:53:22 GMT
+- request:
+    method: get
+    uri: http://open.api.ebay.com/shopping?IncludeSelector=Details&ProductID.Value=111111111111&ProductID.type=UPC&appid=KirillLe-cf21-4352-b4a0-2dd677a4021e&callname=FindProducts&responseencoding=JSON&siteid=0&version=793
+    body:
+      encoding: US-ASCII
+      string: ''
+    headers:
+      Accept-Encoding:
+      - gzip;q=1.0,deflate;q=0.6,identity;q=0.3
+      Accept:
+      - '*/*'
+      User-Agent:
+      - Ruby
+      Host:
+      - open.api.ebay.com
+  response:
+    status:
+      code: 200
+      message: OK
+    headers:
+      Content-Type:
+      - text/plain;charset=utf-8
+      Cache-Control:
+      - no-cache
+      Expires:
+      - Sat, 25 Dec 1999 00:00:00 GMT
+      Last-Modified:
+      - Thu, 29 Aug 2013 07:53:22 GMT
+      Pragma:
+      - no-cache
+      Server:
+      - Apache-Coyote/1.1
+      X-Ebay-Api-Build-Tag:
+      - E837_CORE_APILW2_16317142_R1
+      X-Ebay-Api-Pool-Name:
+      - ___cDRidW9rdDdlaHFg
+      X-Ebay-Api-Server-Name:
+      - ___dm97MmQ3MmYrMGYyNygyNSg/Nys0NzcrPz45PTY/Mw==
+      X-Ebay-Esb-Guid:
+      - urn:uuid:F51832F34CAA077D2638958549897558325-1900085395
+      Date:
+      - Thu, 29 Aug 2013 07:53:21 GMT
+      Transfer-Encoding:
+      - chunked
+    body:
+      encoding: UTF-8
+      string: '{"Timestamp":"2013-08-29T07:53:22.186Z","Ack":"Failure","Errors":[{"ShortMessage":"No
+        match found.","LongMessage":"No match found for your query. Please specify
+        a broader query.","ErrorCode":"10.20","SeverityCode":"Error","ErrorParameters":[{"Value":"totalNumMatchingProducts
+        is zero","ParamID":"0"}],"ErrorClassification":"RequestError"}],"Build":"E837_CORE_APILW2_16317142_R1","Version":"837"}'
+    http_version: 
+  recorded_at: Thu, 29 Aug 2013 07:53:23 GMT
+recorded_with: VCR 2.5.0

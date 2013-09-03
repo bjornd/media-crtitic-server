@@ -33,4 +33,9 @@ MediaCriticServer::Application.configure do
 
   # Print deprecation notices to the stderr.
   config.active_support.deprecation = :stderr
+
+  VCR.configure do |c|
+    c.cassette_library_dir = 'vcr_cassettes'
+    c.hook_into :webmock
+  end
 end
