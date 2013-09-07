@@ -1,4 +1,4 @@
 MediaCriticServer::Application.routes.draw do
   get 'api/lookup/:id' => 'api#lookup'
-  get 'api/search/:query' => 'api#search'
+  get 'api/search' => 'api#search'
 end
