@@ -58,6 +58,23 @@ class ApiController < ApplicationController
     return Net::HTTP.get(URI.parse(URI.escape(url.gsub(' ', '+'), '[]')))
   end
 
+  def dom_extract(root, values)
+    values.each_with_object({}) do |(name, selector), h|
+      if selector.is_a?(Array)
+        selector = selector[0]
+        property = selector[1]
+      else
+        property = nil
+      end
+      el = root.at_css(selector)
+      if el.nil?
+        h[name] = nil
+      else
+        h[name] = property.nil? ? el.content.strip : el[property]
+      end
+    end
+  end
+
   def search_metacritic(title, platform=nil)
     search_url = sprintf(
       ApiController::METACRITIC_SEARCH_URL,
@@ -66,13 +83,13 @@ class ApiController < ApplicationController
     )
     search_doc = Nokogiri::HTML(retrieve_url(search_url))
     search_doc.css('.search_results .result').map do |result|
-      {
-        title: result.at_css('.product_title a').content,
-        score: result.at_css('.metascore').content,
-        platform: result.at_css('.platform').content,
-        release_date: result.at_css('.release_date .data').content,
-        publisher: result.at_css('.publisher .data').content
-      }
+      dom_extract(result, {
+        title: '.product_title a',
+        score: '.metascore',
+        platform: '.platform',
+        release_date: '.release_date .data',
+        publisher: '.publisher .data'
+      })
     end
   end
 
@@ -201,41 +218,40 @@ class ApiController < ApplicationController
 
     game_doc = Nokogiri::HTML(game_page.content)
 
-    score_el = game_doc.at_css('.product_scores .metascore .score_value')
-    maturity_rating_el = game_doc.at_css('.product_details .product_rating .data')
+    user_score_el = game_doc.at_css('.product_scores .feature_userscore .count a')
 
-    return {
-      score: score_el.nil? ? nil : score_el.content,
-      user_score: game_doc.at_css('.product_scores .avguserscore .score_value').content,
-      release_date: game_doc.at_css('.product_data .release_data .data').content,
-      maturity_rating: maturity_rating_el.nil? ? nil : maturity_rating_el.content,
-      publisher: game_doc.at_css('.product_data .publisher .data a').content.strip,
+    dom_extract(game_doc, {
+      score: '.product_scores .metascore .score_value',
+      user_score: '.product_scores .avguserscore .score_value',
+      release_date: '.product_data .release_data .data',
+      maturity_rating: '.product_details .product_rating .data',
+      publisher: '.product_data .publisher .data a',
+      critic_reviews_total: '.product_scores .metascore_summary .count a span',
+    }).merge({
       metacritic_url: game.metacritic_url,
       critic_reviews: game_doc.css('.critic_reviews .review').map do |review|
-        link = review.at_css('.full_review a')
-        date = review.at_css('.review_critic .date')
-        {
-          name: review.at_css('.review_critic a').content,
-          date: date.nil? ? nil : date.content,
-          score: review.at_css('.review_grade').content.strip,
-          content: review.at_css('.review_body').content.strip,
-          link: link.nil? ? nil : link['href']
-        }
+        data = dom_extract(review, {
+          name: '.review_critic a',
+          date: '.review_critic .date',
+          score: '.review_grade',
+          content: '.review_body',
+          link: ['.full_review a', 'href']
+        })
       end,
-      critic_reviews_total: game_doc.at_css('.product_scores .metascore_summary .count a span').content,
       user_reviews: game_doc.css('.user_reviews .review').map do |review|
         if review.at_css('.blurb_etc').nil?
           content = review.at_css('.review_body').content.strip
         else
           content = review.at_css('.blurb_collapsed').content + review.at_css('.blurb_expanded').content
         end
-        {
-          name: review.at_css('.review_critic a, .review_critic span').content,
-          score: review.at_css('.review_grade').content.strip,
+        dom_extract(review, {
+          name: '.review_critic a, .review_critic span',
+          score: '.review_grade'
+        }).merge({
           content: content
-        }
+        })
       end,
-      user_reviews_total: game_doc.at_css('.product_scores .feature_userscore .count a').content.split(' ', 2).first
-    }
+      user_reviews_total: user_score_el.nil? ? nil : user_score_el.content.split(' ', 2).first
+    })
   end
 end
