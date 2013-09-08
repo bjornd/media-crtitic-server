@@ -2,7 +2,7 @@
 http_interactions:
 - request:
     method: get
-    uri: http://www.metacritic.com/search/game/need+for+speed+shift/results?plats%5B0%5D=1&search_type=advanced
+    uri: http://www.metacritic.com/search/game/need+for+speed+shift/results
     body:
       encoding: US-ASCII
       string: ''
@@ -13,8 +13,6 @@ http_interactions:
       - '*/*'
       User-Agent:
       - Ruby
-      Host:
-      - www.metacritic.com
   response:
     status:
       code: 200
@@ -25,40 +23,40 @@ http_interactions:
       Server:
       - Apache
       X-Varnish:
-      - '808823414'
+      - '866940652'
       Vary:
       - Accept-Encoding
       Date:
-      - Tue, 03 Sep 2013 05:10:24 GMT
+      - Sun, 08 Sep 2013 13:59:23 GMT
       Transfer-Encoding:
       - chunked
       Connection:
       - Transfer-Encoding
       - keep-alive
       Set-Cookie:
-      - ctk=NTIyNTZmM2Y2ZDZlZjEzMmUxMDBiZDY4NjMwNA%3D%3D; expires=Sun, 02-Mar-2014
-        05:10:23 GMT; path=/; domain=.metacritic.com
+      - ctk=NTIyYzgyYmI2ZDZlZjEzMmI2Nzc0NzJjMzI1YQ%3D%3D; expires=Fri, 07-Mar-2014
+        13:59:23 GMT; path=/; domain=.metacritic.com
     body:
       encoding: UTF-8
       string: "<!DOCTYPE html PUBLIC \"-//W3C//DTD HTML 4.01//EN\"\n   \"http://www.w3.org/TR/html4/strict.dtd\">\n<html
         xmlns:og=\"http://opengraphprotocol.org/schema/\"\n      xmlns:fb=\"http://ogp.me/ns/fb#\">\n<head>\n
         \       \t<script type=\"text/javascript\">var NREUMQ=NREUMQ||[];NREUMQ.push([\"mark\",\"firstbyte\",new
-        Date().getTime()]);</script>\n<title>Advanced Search Results for need for
-        speed shift at Metacritic - Metacritic</title>\n\t\n    \n    \n    <meta
-        http-equiv=\"content-type\" content=\"text/html; charset=UTF-8\">\n\n    \n
-        \   <meta name=\"description\" content=\"Advanced search results for need
-        for speed shift at Metacritic.com\">\n\n    \n    \n    <meta name=\"viewport\"
+        Date().getTime()]);</script>\n<title>need for speed shift - Reviews, Articles,
+        People, Trailers and more at Metacritic - Metacritic</title>\n\t\n    \n    \n
+        \   <meta http-equiv=\"content-type\" content=\"text/html; charset=UTF-8\">\n\n
+        \   \n    <meta name=\"description\" content=\"Search results for need for
+        speed shift at Metacritic.com\">\n\n    \n    \n    <meta name=\"viewport\"
         content=\"width=1024\" />\n\n\n    \n    <meta  name=\"robots\" content=\"NOINDEX,
         FOLLOW\">\n\n\n    \n    <meta name=\"application-name\" content=\"Metacritic\"/>\n
         \   <meta name=\"msapplication-TileColor\" content=\"#000000\"/>\n    <meta
         name=\"msapplication-TileImage\" content=\"/images/win8tile/76bf1426-2886-4b87-ae1c-06424b6bb8a2.png\"/>\n\n
-        \   \n    \n    \n    <meta id=\"siteAdsPageParams\" content=\"{'service':'madison','client':'mantaray','params':{'SITE':50,'BRAND':21,'NCAT':'1','NODE':'1','PTYPE':'6056','PGUID':'52256f3fed1f2','STAGING':0},'localPage':'\\/\\/www.metacritic.com\\/static\\/adframes\\/mantaray\\/MantaRay_LocalPage.html','script':'http:\\/\\/i.i.cbsi.com\\/cnwk.1d\\/Ads\\/common\\/manta\\/adFunctionsD-metacritic.js'}\"
+        \   \n    \n    \n    <meta id=\"siteAdsPageParams\" content=\"{'service':'madison','client':'mantaray','params':{'SITE':50,'BRAND':21,'NCAT':'1','NODE':'1','PTYPE':'6056','PGUID':'522c82bb1834b','STAGING':0},'localPage':'\\/\\/www.metacritic.com\\/static\\/adframes\\/mantaray\\/MantaRay_LocalPage.html','script':'http:\\/\\/i.i.cbsi.com\\/cnwk.1d\\/Ads\\/common\\/manta\\/adFunctionsD-metacritic.js'}\"
         />\n\n    \n    \n    <link rel=\"stylesheet\" href=\"/css/global.min.1377816691.css\"
         type=\"text/css\">\n<link rel=\"stylesheet\" href=\"/css/search/base.min.1377816609.css\"
         type=\"text/css\">\n\n\n    \n        \n    \n\t\t\t\n\t\t\t\t    \n\n    \n
         \   \n    <script type=\"text/javascript\" src=\"/js/global.min.1377816691.js\"></script>\n\n
         \           <script src= \"http://i.i.cbsi.com/cnwk.1d/Ads/common/manta/adFunctionsD-metacritic.js\"></script>\n
-        \       <script>\n    \tvar tempVar = {'service':'madison','client':'mantaray','params':{'SITE':50,'BRAND':21,'NCAT':'1','NODE':'1','PTYPE':'6056','PGUID':'52256f3fed1f2','STAGING':0},'localPage':'\\/\\/www.metacritic.com\\/static\\/adframes\\/mantaray\\/MantaRay_LocalPage.html','script':'http:\\/\\/i.i.cbsi.com\\/cnwk.1d\\/Ads\\/common\\/manta\\/adFunctionsD-metacritic.js'};\n\t\tvar
+        \       <script>\n    \tvar tempVar = {'service':'madison','client':'mantaray','params':{'SITE':50,'BRAND':21,'NCAT':'1','NODE':'1','PTYPE':'6056','PGUID':'522c82bb1834b','STAGING':0},'localPage':'\\/\\/www.metacritic.com\\/static\\/adframes\\/mantaray\\/MantaRay_LocalPage.html','script':'http:\\/\\/i.i.cbsi.com\\/cnwk.1d\\/Ads\\/common\\/manta\\/adFunctionsD-metacritic.js'};\n\t\tvar
         cbsiAdGlobal = tempVar.params;\n\t\tcbsiRegisterAdGlobals(cbsiAdGlobal);\n\t\tcbsiSetDeferredLocalPage('/manta_ray_local_page.html');\n\t\tvar
         cbsiAdIntromercial = { 'SP': '80', 'POS': '100' };\n\t\tcbsiGetAd(cbsiAdIntromercial);\t\t\n\t</script>\n\n\t<script
         type=\"text/javascript\">\n\t\t\n\t    (function(d,c){var a,b,g,e;a=d.createElement(\"script\");a.type=\"text/javascript\";\n\t
@@ -185,21 +183,18 @@ http_interactions:
         class=\"site_gutters\">\n                    <div id=\"container\">\n\n<div
         id=\"col_layout\" class=\"col_layout\">\n        \n    <div id=\"main_content\"
         class=\"content_section mpu_layout\" >\n        <div class=\"layout\">\n                                    <div
-        id=\"main\" class=\"col main_col\">\n                <div class=\"module adv_search_module\"><div
-        class=\"adv_search\"><form id=\"adv_search\" class=\"adv_search search_conditions_hide\"
-        method=\"post\" action=\"/advanced-search\"><fieldset><legend>Advanced Search
-        Fields</legend><div class=\"fieldsets_wrap\"><div class=\"search_term\"><div
-        class=\"search_term_wrap\">    <div class=\"search_filters\">\n        <ol
+        id=\"main\" class=\"col main_col\">\n                    <div class=\"module
+        search_module\">\n                <div class=\"search_filters\">\n        <ol
         class=\"search_filters\">\n                                <li class=\"search_filter
         filter_all first_filter\">\n                <span class=\"filter_item\">\n
         \                   <span class=\"filter_item_wrap\">\n                                                    <a
-        rel=\"nofollow\" class=\"all\" href=\"/advanced-search/all?search_term=need%2Bfor%2Bspeed%2Bshift\">\n
+        rel=\"nofollow\" class=\"all\" href=\"/search/all/need+for+speed+shift/results\">\n
         \                               <span class=\"link_text\">All Items</span>\n
         \                           </a>\n                                            </span>\n
         \               </span>\n            </li>\n                                <li
         class=\"search_filter filter_movie\">\n                <span class=\"filter_item\">\n
         \                   <span class=\"filter_item_wrap\">\n                                                    <a
-        rel=\"nofollow\" class=\"movie\" href=\"/advanced-search/movie?search_term=need%2Bfor%2Bspeed%2Bshift\">\n
+        rel=\"nofollow\" class=\"movie\" href=\"/search/movie/need+for+speed+shift/results\">\n
         \                               <span class=\"link_text\">Movies</span>\n
         \                           </a>\n                                            </span>\n
         \               </span>\n            </li>\n                                <li
@@ -209,222 +204,67 @@ http_interactions:
         \               </span>\n            </li>\n                                <li
         class=\"search_filter filter_album\">\n                <span class=\"filter_item\">\n
         \                   <span class=\"filter_item_wrap\">\n                                                    <a
-        rel=\"nofollow\" class=\"album\" href=\"/advanced-search/album?search_term=need%2Bfor%2Bspeed%2Bshift\">\n
-        \                               <span class=\"link_text\">Music</span>\n                            </a>\n
-        \                                           </span>\n                </span>\n
-        \           </li>\n                                <li class=\"search_filter
-        filter_tv\">\n                <span class=\"filter_item\">\n                    <span
-        class=\"filter_item_wrap\">\n                                                    <a
-        rel=\"nofollow\" class=\"tv\" href=\"/advanced-search/tv?search_term=need%2Bfor%2Bspeed%2Bshift\">\n
-        \                               <span class=\"link_text\">TV</span>\n                            </a>\n
-        \                                           </span>\n                </span>\n
-        \           </li>\n                                <li class=\"search_filter
-        filter_person\">\n                <span class=\"filter_item\">\n                    <span
-        class=\"filter_item_wrap\">\n                                                    <a
-        rel=\"nofollow\" class=\"person\" href=\"/advanced-search/person?search_term=need%2Bfor%2Bspeed%2Bshift\">\n
-        \                               <span class=\"link_text\">People/Artists</span>\n
+        rel=\"nofollow\" class=\"album\" href=\"/search/album/need+for+speed+shift/results\">\n
+        \                               <span class=\"link_text\">Albums</span>\n
+        \                           </a>\n                                            </span>\n
+        \               </span>\n            </li>\n                                <li
+        class=\"search_filter filter_tv\">\n                <span class=\"filter_item\">\n
+        \                   <span class=\"filter_item_wrap\">\n                                                    <a
+        rel=\"nofollow\" class=\"tv\" href=\"/search/tv/need+for+speed+shift/results\">\n
+        \                               <span class=\"link_text\">TV Shows</span>\n
+        \                           </a>\n                                            </span>\n
+        \               </span>\n            </li>\n                                <li
+        class=\"search_filter filter_person\">\n                <span class=\"filter_item\">\n
+        \                   <span class=\"filter_item_wrap\">\n                                                    <a
+        rel=\"nofollow\" class=\"person\" href=\"/search/person/need+for+speed+shift/results\">\n
+        \                               <span class=\"link_text\">Person</span>\n
+        \                           </a>\n                                            </span>\n
+        \               </span>\n            </li>\n                                <li
+        class=\"search_filter filter_video\">\n                <span class=\"filter_item\">\n
+        \                   <span class=\"filter_item_wrap\">\n                                                    <a
+        rel=\"nofollow\" class=\"video\" href=\"/search/video/need+for+speed+shift/results\">\n
+        \                               <span class=\"link_text\">Trailers</span>\n
         \                           </a>\n                                            </span>\n
         \               </span>\n            </li>\n                                <li
         class=\"search_filter filter_company last_filter\">\n                <span
         class=\"filter_item\">\n                    <span class=\"filter_item_wrap\">\n
         \                                                   <a rel=\"nofollow\" class=\"company\"
-        href=\"/advanced-search/company?search_term=need%2Bfor%2Bspeed%2Bshift\">\n
-        \                               <span class=\"link_text\">Companies</span>\n
-        \                           </a>\n                                            </span>\n
-        \               </span>\n            </li>\n                </ol>\n    </div>\n<div
-        class=\"field search_field search_query\"><div class=\"field_wrap\"><span
-        class=\"field\"><input class=\"text\" type=\"text\" size=\"50\" name=\"search_term\"
-        \ value=\"need for speed shift\" /></span></div></div><div class=\"helptext
-        search_term_helptext\"><div id=\"searchButton\" class=\"new_search_btn\"><div
-        class=\"new_search_btn_wrap\"><div class=\"new_search_btn_r\"><a href=\"#\">Create
-        a new Search</a></div></div></div></div></div></div><ol id=\"searchForm\"
-        class=\"search_conditions\"><li class=\"fieldset search_term_helptext\">If
-        you are searching for a Person/Artist or Company, please use the corresponding
-        tab above.</li><li class=\"fieldset search_plats\"><fieldset><legend>Plats</legend><div
-        class=\"fieldset_wrap\"><div class=\"fieldset_label\">Platform: </div><div
-        class=\"fields\"><ol class=\"fields switch_fields search_switches\"><li class=\"field
-        switch_field search_switch search_plats_checkbox\"><label for=\"plats_1\"><span
-        class=\"field_wrap\"><span class=\"label_input\"><input class=\"switch checkbox_switch\"
-        type=\"checkbox\" id=\"plats_1\" name=\"plats[1]\" value=\"1\" /></span><span
-        class=\"label_text\">PlayStation 3</span></span></label></li><li class=\"field
-        switch_field search_switch search_plats_checkbox\"><label for=\"plats_2\"><span
-        class=\"field_wrap\"><span class=\"label_input\"><input class=\"switch checkbox_switch\"
-        type=\"checkbox\" id=\"plats_2\" name=\"plats[2]\" value=\"1\" /></span><span
-        class=\"label_text\">Xbox 360</span></span></label></li><li class=\"field
-        switch_field search_switch search_plats_checkbox\"><label for=\"plats_3\"><span
-        class=\"field_wrap\"><span class=\"label_input\"><input class=\"switch checkbox_switch\"
-        type=\"checkbox\" id=\"plats_3\" name=\"plats[3]\" value=\"1\" /></span><span
-        class=\"label_text\">PC</span></span></label></li><li class=\"field switch_field
-        search_switch search_plats_checkbox\"><label for=\"plats_4\"><span class=\"field_wrap\"><span
-        class=\"label_input\"><input class=\"switch checkbox_switch\" type=\"checkbox\"
-        id=\"plats_4\" name=\"plats[4]\" value=\"1\" /></span><span class=\"label_text\">DS</span></span></label></li><li
-        class=\"field switch_field search_switch search_plats_checkbox\"><label for=\"plats_16\"><span
-        class=\"field_wrap\"><span class=\"label_input\"><input class=\"switch checkbox_switch\"
-        type=\"checkbox\" id=\"plats_16\" name=\"plats[16]\" value=\"1\" /></span><span
-        class=\"label_text\">3DS</span></span></label></li><li class=\"field switch_field
-        search_switch search_plats_checkbox\"><label for=\"plats_67365\"><span class=\"field_wrap\"><span
-        class=\"label_input\"><input class=\"switch checkbox_switch\" type=\"checkbox\"
-        id=\"plats_67365\" name=\"plats[67365]\" value=\"1\" /></span><span class=\"label_text\">PlayStation
-        Vita</span></span></label></li><li class=\"field switch_field search_switch
-        search_plats_checkbox\"><label for=\"plats_7\"><span class=\"field_wrap\"><span
-        class=\"label_input\"><input class=\"switch checkbox_switch\" type=\"checkbox\"
-        id=\"plats_7\" name=\"plats[7]\" value=\"1\" /></span><span class=\"label_text\">PSP</span></span></label></li><li
-        class=\"field switch_field search_switch search_plats_checkbox\"><label for=\"plats_8\"><span
-        class=\"field_wrap\"><span class=\"label_input\"><input class=\"switch checkbox_switch\"
-        type=\"checkbox\" id=\"plats_8\" name=\"plats[8]\" value=\"1\" /></span><span
-        class=\"label_text\">Wii</span></span></label></li><li class=\"field switch_field
-        search_switch search_plats_checkbox\"><label for=\"plats_68410\"><span class=\"field_wrap\"><span
-        class=\"label_input\"><input class=\"switch checkbox_switch\" type=\"checkbox\"
-        id=\"plats_68410\" name=\"plats[68410]\" value=\"1\" /></span><span class=\"label_text\">Wii
-        U</span></span></label></li><li class=\"field switch_field search_switch search_plats_checkbox\"><label
-        for=\"plats_6\"><span class=\"field_wrap\"><span class=\"label_input\"><input
-        class=\"switch checkbox_switch\" type=\"checkbox\" id=\"plats_6\" name=\"plats[6]\"
-        value=\"1\" /></span><span class=\"label_text\">PlayStation 2</span></span></label></li><li
-        class=\"field switch_field search_switch search_plats_checkbox\"><label for=\"plats_10\"><span
-        class=\"field_wrap\"><span class=\"label_input\"><input class=\"switch checkbox_switch\"
-        type=\"checkbox\" id=\"plats_10\" name=\"plats[10]\" value=\"1\" /></span><span
-        class=\"label_text\">PlayStation</span></span></label></li><li class=\"field
-        switch_field search_switch search_plats_checkbox\"><label for=\"plats_11\"><span
-        class=\"field_wrap\"><span class=\"label_input\"><input class=\"switch checkbox_switch\"
-        type=\"checkbox\" id=\"plats_11\" name=\"plats[11]\" value=\"1\" /></span><span
-        class=\"label_text\">Game Boy Advance</span></span></label></li><li class=\"field
-        switch_field search_switch search_plats_checkbox\"><label for=\"plats_9\"><span
-        class=\"field_wrap\"><span class=\"label_input\"><input class=\"switch checkbox_switch\"
-        type=\"checkbox\" id=\"plats_9\" name=\"plats[9]\" value=\"1\" /></span><span
-        class=\"label_text\">iPhone/iPad</span></span></label></li><li class=\"field
-        switch_field search_switch search_plats_checkbox\"><label for=\"plats_12\"><span
-        class=\"field_wrap\"><span class=\"label_input\"><input class=\"switch checkbox_switch\"
-        type=\"checkbox\" id=\"plats_12\" name=\"plats[12]\" value=\"1\" /></span><span
-        class=\"label_text\">Xbox</span></span></label></li><li class=\"field switch_field
-        search_switch search_plats_checkbox\"><label for=\"plats_13\"><span class=\"field_wrap\"><span
-        class=\"label_input\"><input class=\"switch checkbox_switch\" type=\"checkbox\"
-        id=\"plats_13\" name=\"plats[13]\" value=\"1\" /></span><span class=\"label_text\">GameCube</span></span></label></li><li
-        class=\"field switch_field search_switch search_plats_checkbox\"><label for=\"plats_14\"><span
-        class=\"field_wrap\"><span class=\"label_input\"><input class=\"switch checkbox_switch\"
-        type=\"checkbox\" id=\"plats_14\" name=\"plats[14]\" value=\"1\" /></span><span
-        class=\"label_text\">Nintendo 64</span></span></label></li><li class=\"field
-        switch_field search_switch search_plats_checkbox\"><label for=\"plats_15\"><span
-        class=\"field_wrap\"><span class=\"label_input\"><input class=\"switch checkbox_switch\"
-        type=\"checkbox\" id=\"plats_15\" name=\"plats[15]\" value=\"1\" /></span><span
-        class=\"label_text\">Dreamcast</span></span></label></li></ol></div></div></fieldset></li><li
-        class=\"fieldset search_genres\"><fieldset><legend>Genres</legend><div class=\"fieldset_wrap\"><div
-        class=\"fieldset_label\">Genre: </div><div class=\"fields\"><ol class=\"fields
-        switch_fields search_switches\"><li class=\"field switch_field search_switch
-        search_genres_checkbox\"><label for=\"genres_action\"><span class=\"field_wrap\"><span
-        class=\"label_input\"><input class=\"switch checkbox_switch\" type=\"checkbox\"
-        id=\"genres_action\" name=\"genres[action]\" value=\"1\" /></span><span class=\"label_text\">Action</span></span></label></li><li
-        class=\"field switch_field search_switch search_genres_checkbox\"><label for=\"genres_adventure\"><span
-        class=\"field_wrap\"><span class=\"label_input\"><input class=\"switch checkbox_switch\"
-        type=\"checkbox\" id=\"genres_adventure\" name=\"genres[adventure]\" value=\"1\"
-        /></span><span class=\"label_text\">Adventure</span></span></label></li><li
-        class=\"field switch_field search_switch search_genres_checkbox\"><label for=\"genres_fighting\"><span
-        class=\"field_wrap\"><span class=\"label_input\"><input class=\"switch checkbox_switch\"
-        type=\"checkbox\" id=\"genres_fighting\" name=\"genres[fighting]\" value=\"1\"
-        /></span><span class=\"label_text\">Fighting Games</span></span></label></li><li
-        class=\"field switch_field search_switch search_genres_checkbox\"><label for=\"genres_first-person\"><span
-        class=\"field_wrap\"><span class=\"label_input\"><input class=\"switch checkbox_switch\"
-        type=\"checkbox\" id=\"genres_first-person\" name=\"genres[first-person]\"
-        value=\"1\" /></span><span class=\"label_text\">First-Person Shooters</span></span></label></li><li
-        class=\"field switch_field search_switch search_genres_checkbox\"><label for=\"genres_flight\"><span
-        class=\"field_wrap\"><span class=\"label_input\"><input class=\"switch checkbox_switch\"
-        type=\"checkbox\" id=\"genres_flight\" name=\"genres[flight]\" value=\"1\"
-        /></span><span class=\"label_text\">Flight/Flying</span></span></label></li><li
-        class=\"field switch_field search_switch search_genres_checkbox\"><label for=\"genres_party\"><span
-        class=\"field_wrap\"><span class=\"label_input\"><input class=\"switch checkbox_switch\"
-        type=\"checkbox\" id=\"genres_party\" name=\"genres[party]\" value=\"1\" /></span><span
-        class=\"label_text\">Party</span></span></label></li><li class=\"field switch_field
-        search_switch search_genres_checkbox\"><label for=\"genres_platformer\"><span
-        class=\"field_wrap\"><span class=\"label_input\"><input class=\"switch checkbox_switch\"
-        type=\"checkbox\" id=\"genres_platformer\" name=\"genres[platformer]\" value=\"1\"
-        /></span><span class=\"label_text\">Platformer</span></span></label></li><li
-        class=\"field switch_field search_switch search_genres_checkbox\"><label for=\"genres_puzzle\"><span
-        class=\"field_wrap\"><span class=\"label_input\"><input class=\"switch checkbox_switch\"
-        type=\"checkbox\" id=\"genres_puzzle\" name=\"genres[puzzle]\" value=\"1\"
-        /></span><span class=\"label_text\">Puzzle</span></span></label></li><li class=\"field
-        switch_field search_switch search_genres_checkbox\"><label for=\"genres_racing\"><span
-        class=\"field_wrap\"><span class=\"label_input\"><input class=\"switch checkbox_switch\"
-        type=\"checkbox\" id=\"genres_racing\" name=\"genres[racing]\" value=\"1\"
-        /></span><span class=\"label_text\">Racing</span></span></label></li><li class=\"field
-        switch_field search_switch search_genres_checkbox\"><label for=\"genres_real-time\"><span
-        class=\"field_wrap\"><span class=\"label_input\"><input class=\"switch checkbox_switch\"
-        type=\"checkbox\" id=\"genres_real-time\" name=\"genres[real-time]\" value=\"1\"
-        /></span><span class=\"label_text\">Real-Time Strategy</span></span></label></li><li
-        class=\"field switch_field search_switch search_genres_checkbox\"><label for=\"genres_role-playing\"><span
-        class=\"field_wrap\"><span class=\"label_input\"><input class=\"switch checkbox_switch\"
-        type=\"checkbox\" id=\"genres_role-playing\" name=\"genres[role-playing]\"
-        value=\"1\" /></span><span class=\"label_text\">Role-Playing</span></span></label></li><li
-        class=\"field switch_field search_switch search_genres_checkbox\"><label for=\"genres_simulation\"><span
-        class=\"field_wrap\"><span class=\"label_input\"><input class=\"switch checkbox_switch\"
-        type=\"checkbox\" id=\"genres_simulation\" name=\"genres[simulation]\" value=\"1\"
-        /></span><span class=\"label_text\">Simulation</span></span></label></li><li
-        class=\"field switch_field search_switch search_genres_checkbox\"><label for=\"genres_sports\"><span
-        class=\"field_wrap\"><span class=\"label_input\"><input class=\"switch checkbox_switch\"
-        type=\"checkbox\" id=\"genres_sports\" name=\"genres[sports]\" value=\"1\"
-        /></span><span class=\"label_text\">Sports</span></span></label></li><li class=\"field
-        switch_field search_switch search_genres_checkbox\"><label for=\"genres_strategy\"><span
-        class=\"field_wrap\"><span class=\"label_input\"><input class=\"switch checkbox_switch\"
-        type=\"checkbox\" id=\"genres_strategy\" name=\"genres[strategy]\" value=\"1\"
-        /></span><span class=\"label_text\">Strategy</span></span></label></li><li
-        class=\"field switch_field search_switch search_genres_checkbox\"><label for=\"genres_third-person\"><span
-        class=\"field_wrap\"><span class=\"label_input\"><input class=\"switch checkbox_switch\"
-        type=\"checkbox\" id=\"genres_third-person\" name=\"genres[third-person]\"
-        value=\"1\" /></span><span class=\"label_text\">Third-Person Shooter</span></span></label></li><li
-        class=\"field switch_field search_switch search_genres_checkbox\"><label for=\"genres_turn-based\"><span
-        class=\"field_wrap\"><span class=\"label_input\"><input class=\"switch checkbox_switch\"
-        type=\"checkbox\" id=\"genres_turn-based\" name=\"genres[turn-based]\" value=\"1\"
-        /></span><span class=\"label_text\">Turn-Based Strategy</span></span></label></li><li
-        class=\"field switch_field search_switch search_genres_checkbox\"><label for=\"genres_wargame\"><span
-        class=\"field_wrap\"><span class=\"label_input\"><input class=\"switch checkbox_switch\"
-        type=\"checkbox\" id=\"genres_wargame\" name=\"genres[wargame]\" value=\"1\"
-        /></span><span class=\"label_text\">Wargames</span></span></label></li><li
-        class=\"field switch_field search_switch search_genres_checkbox\"><label for=\"genres_wrestling\"><span
-        class=\"field_wrap\"><span class=\"label_input\"><input class=\"switch checkbox_switch\"
-        type=\"checkbox\" id=\"genres_wrestling\" name=\"genres[wrestling]\" value=\"1\"
-        /></span><span class=\"label_text\">Wrestling</span></span></label></li></ol></div></div></fieldset></li><li
-        class=\"fieldset search_range search_date_range\"><fieldset><legend>Date Range</legend><div
-        class=\"fieldset_wrap\"><div class=\"fieldset_label\">Date range:</div><div
-        class=\"fields\"><ol class=\"fields\"><li class=\"field text_input_field search_text_input\"><div
-        class=\"field_wrap\"><div class=\"field_label text_input_label\"><label for=\"date_range_s\">From:</label></div><div
-        class=\"field_value\"><span class=\"text_input\"><input class=\"text\" type=\"text\"
-        maxlength=\"10\" size=\"10\" id=\"date_range_s\" name=\"date_range_from\"
-        value=\"\" /></span></div></div></li><li class=\"field text_input_field search_text_input\"><div
-        class=\"field_wrap\"><div class=\"field_label text_input_label\"><label for=\"date_range_e\">To:</label></div><div
-        class=\"field_value\"><span class=\"text_input\"><input class=\"text\" type=\"text\"
-        maxlength=\"10\" size=\"10\" id=\"date_range_e\" name=\"date_range_to\" value=\"\"
-        /></span></div></div></li></ol></div><div class=\"helptext fieldset_helptext\"><p>You
-        may fill in one, both, or neither <span class=\"helptext_supplement\">(leave
-        both blank to search all release dates).</span></p><p>Enter dates as MM/DD/YYYY</p></div></div></fieldset></li><li
-        class=\"fieldset search_range search_score_range\"><fieldset><legend>Score
-        Range</legend><div class=\"fieldset_wrap\"><div class=\"fieldset_label\">Score
-        range:</div><div class=\"fields\"><ol class=\"fields\"><li class=\"field text_input_field
-        search_text_input\"><div class=\"field_wrap\"><div class=\"field_label text_input_label\"><label
-        for=\"metascore_s\">With average score greater than:</label></div><div class=\"field_value\"><span
-        class=\"text_input\"><input class=\"text\" type=\"text\" maxlength=\"2\" size=\"3\"
-        id=\"metascore_s\" name=\"score_range_from\" value=\"\" /></span></div></div></li><li
-        class=\"field text_input_field search_text_input\"><div class=\"field_wrap\"><div
-        class=\"field_label text_input_label\"><label for=\"metascore_e\">and/or less
-        than:</label></div><div class=\"field_value\"><span class=\"text_input\"><input
-        class=\"text\" type=\"text\" maxlength=\"3\" size=\"3\" id=\"metascore_e\"
-        name=\"score_range_to\" value=\"\" /></span></div></div></li></ol></div><div
-        class=\"helptext fieldset_helptext\"><p>You may fill in one, both, or neither
-        <span class=\"helptext_supplement\">(leave both blank to include all scores).</span></p></div></div></fieldset></li><li
-        class=\"fieldset search_actions\"><fieldset><legend>Search Submit</legend><ol
-        class=\"fields\"><li class=\"field search_field search_submit\"><div class=\"submit_btn\"><div
-        class=\"submit_btn_wrap submit_btn_wrap_l\"><div class=\"submit_btn_wrap submit_btn_wrap_r\"><button
-        class=\"submit\" type=\"submit\"><span class=\"submit_btn_text\">Search</span></button></div></div></div></li><li
-        class=\"field hidden\"><input type=\"hidden\" name=\"search_type\" value=\"advanced\"
-        /><input type=\"hidden\" name=\"search_filter\" value=\"game\" /></li></ol></fieldset></li></ol></div></fieldset></form></div></div>\n\n<div
-        class=\"module search_results\">\n        <div class=\"body\">\n\n                                <p
-        class=\"query_results\">Showing 6 results</p>\n\n                                    <div
-        class=\"tabs \">\n        <div class=\"tab_wrap\">\n                            <ul
-        class=\"tabs tabs_type_1\">            <li class=\"tab tab_type_1 tab_relevancy
-        first\">\n                                    <span class=\"active\"><span>Relevancy</span></span>\n
-        \                           </li>\n                                                        <li
-        class=\"tab tab_type_1 tab_score\">\n                                                        <a
-        \ href=\"/search/game/need+for+speed+shift/results?plats%5B0%5D=1&search_type=advanced&sort=score\"><span>Score</span></a>\n
+        href=\"/search/company/need+for+speed+shift/results\">\n                                <span
+        class=\"link_text\">Companies</span>\n                            </a>\n                                            </span>\n
+        \               </span>\n            </li>\n                </ol>\n    </div>\n\n
+        \       <div class=\"search basic_search has_adv_search_link\">\n    \n\t\t
+        \           \n            <div class=\"search_section\">\n                <div
+        class=\"placeholder\"></div>\n            </div>\n             \n        <div
+        class=\"search_section basic_search_section\">\n            <form class=\"search\"
+        method=\"post\" action=\"/search\">\n                <fieldset>\n                    <legend>Basic
+        Search Fields</legend>\n                    <div class=\"search_wrap\">\n
+        \                       \n                        <ol class=\"fields search_fields\">\n
+        \                           \n                            <li class=\"field
+        search_field search_query\">\n                                <div class=\"field_wrap\">\n
+        \                                   <span class=\"field\">\n                                        <input
+        class=\"text\" type=\"text\" size=\"50\" name=\"search_term\" id=\"search_term\"
+        value=\"need for speed shift\" autocomplete=\"off\" />\n                                    </span>\n
+        \                                   <span class=\"search_msg\">\n                                        Search
+        Metacritic\n                                    </span>\n                                </div>\n
+        \                           </li>\n                            <li class=\"field
+        search_field search_submit\">\n                                <div class=\"submit\"><div
+        class=\"btn\"><button class=\"submit\" type=\"submit\"><span>Search</span></button></div></div>\n
+        \                           </li>\n                            <li class=\"field
+        hidden\">\n                                <input type=\"hidden\" name=\"search_filter\"
+        value=\"game\" />\n                            </li>\n                        </ol>\n
+        \                   </div>\n                </fieldset>\n            </form>\n
+        \       </div>\n\t\t\n\t\t\n\t\t\n\t\t\n\n\t\t\n\t\t\n\t\t\n\t\t\n    </div>\n
+        \   </div>\n\n\n\n<div class=\"module search_results\">\n        <div class=\"body\">\n\n
+        \                               <p class=\"query_results\">Showing 6 results</p>\n\n
+        \                                   <div class=\"tabs \">\n        <div class=\"tab_wrap\">\n
+        \                           <ul class=\"tabs tabs_type_1\">            <li
+        class=\"tab tab_type_1 tab_relevancy first\">\n                                    <span
+        class=\"active\"><span>Relevancy</span></span>\n                            </li>\n
+        \                                                       <li class=\"tab tab_type_1
+        tab_score\">\n                                                        <a  href=\"/search/game/need+for+speed+shift/results?sort=score\"><span>Score</span></a>\n
         \                           </li>\n                                                        <li
         class=\"tab tab_type_1 tab_recent last\">\n                                                        <a
-        \ href=\"/search/game/need+for+speed+shift/results?plats%5B0%5D=1&search_type=advanced&sort=recent\"><span>Most
+        \ href=\"/search/game/need+for+speed+shift/results?sort=recent\"><span>Most
         Recent</span></a>\n                            </li>\n            </ul>                                </div>\n
         \   </div>\n    \n                        <div style=\"background-color:#FEFFF7;
         margin-top:10px; padding: 5px; width:625px;\">\n                <div id=\"gafscsa\"
@@ -804,8 +644,8 @@ http_interactions:
         fjs);\n        }(document, 'script', 'facebook-jssdk'));\n        \n    </script>\n\n
         \   \n    \n    <script>!function(d,s,id){var js,fjs=d.getElementsByTagName(s)[0];if(!d.getElementById(id)){js=d.createElement(s);js.id=id;js.src=\"https://platform.twitter.com/widgets.js\";fjs.parentNode.insertBefore(js,fjs);}}(document,\"script\",\"twitter-wjs\");</script>\n
         \   \n\n\n</div>\n\n<script type=\"text/javascript\">if(!NREUMQ.f){NREUMQ.f=function(){NREUMQ.push([\"load\",new
-        Date().getTime()]);var e=document.createElement(\"script\");e.type=\"text/javascript\";e.src=((\"http:\"===document.location.protocol)?\"http:\":\"https:\")+\"//\"+\"js-agent.newrelic.com/nr-100.js\";document.body.appendChild(e);if(NREUMQ.a)NREUMQ.a();};NREUMQ.a=window.onload;window.onload=NREUMQ.f;};NREUMQ.push([\"nrfj\",\"beacon-3.newrelic.com\",\"860f7644b8\",\"2033002\",\"MgQEZ0dYCxEAVRBbDQtOJUZGTQoPTmUBUxAGCVwJR1wWFw1CFw==\",0,660,new
+        Date().getTime()]);var e=document.createElement(\"script\");e.type=\"text/javascript\";e.src=((\"http:\"===document.location.protocol)?\"http:\":\"https:\")+\"//\"+\"js-agent.newrelic.com/nr-100.js\";document.body.appendChild(e);if(NREUMQ.a)NREUMQ.a();};NREUMQ.a=window.onload;window.onload=NREUMQ.f;};NREUMQ.push([\"nrfj\",\"beacon-6.newrelic.com\",\"860f7644b8\",\"2033002\",\"MgQEZ0dYCxEAVRBbDQtOJUZGTQoPTmUBUxAGCVwJR1wWFw1CFw==\",0,281,new
         Date().getTime(),\"\",\"\",\"\",\"\",\"\"]);</script>\n</body>\n</html>\n\n"
     http_version: 
-  recorded_at: Tue, 03 Sep 2013 05:10:25 GMT
+  recorded_at: Sun, 08 Sep 2013 13:59:23 GMT
 recorded_with: VCR 2.5.0

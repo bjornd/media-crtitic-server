@@ -17,7 +17,7 @@ class ApiControllerTest < ActionController::TestCase
     end
   end
 
-  test "lookup for a invalid product" do
+  test "lookup for invalid product" do
     VCR.use_cassette('lookup for invalid product', :match_requests_on => get_match) do
        get(:lookup, id: '111111111111')
        assert_response :missing
@@ -36,6 +36,7 @@ class ApiControllerTest < ActionController::TestCase
        assert_equal body[0]["platform"], 'PC'
        assert_equal body[0]["release_date"], 'Sep 15, 2009'
        assert_equal body[0]["publisher"], 'EA Games'
+       assert_equal body[0]["url"], '/game/pc/need-for-speed-shift'
     end
   end
 
@@ -45,6 +46,25 @@ class ApiControllerTest < ActionController::TestCase
        assert_response :success
        body = JSON.parse(@response.body)
        assert_equal body.length, 0
+    end
+  end
+
+  test "successful game retrieval" do
+    VCR.use_cassette('retrieval of resistance 3', :match_requests_on => get_match) do
+       get(:retrieve, url: '/game/playstation-3/resistance-3')
+       assert_response :success
+       body = JSON.parse(@response.body)
+       assert_equal body["title"], "Resistance 3"
+       assert_equal body["platform"], "PlayStation 3"
+       assert_equal body["metacritic_url"], "/game/playstation-3/resistance-3"
+       assert_equal body["score"], "83"
+    end
+  end
+
+  test "retrieval of invalid game" do
+    VCR.use_cassette('retrieval of invalid game', :match_requests_on => get_match) do
+       get(:retrieve, url: '/foobar')
+       assert_response :missing
     end
   end
 end

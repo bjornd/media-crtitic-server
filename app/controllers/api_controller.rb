@@ -5,10 +5,10 @@ class ApiController < ApplicationController
   def lookup
     search_params = {id: params[:id]}
 
-    if params[:id].length === 12
+    if params[:id].length == 12
       search_params[:id_type] = 'UPC'
       search_params[:country] = 'us'
-    elsif (params[:id].length === 13)
+    elsif (params[:id].length == 13)
       search_params[:id_type] = 'EAN'
       search_params[:country] = 'uk'
     else
@@ -16,27 +16,46 @@ class ApiController < ApplicationController
       return
     end
 
-    titles = []
-    amazon_info = get_amazon_info(search_params)
-    titles.push( amazon_info[:title] ) if !amazon_info.nil?
-    ebay_info = get_ebay_info(search_params)
-    titles.push( ebay_info[:title] ) !ebay_info.nil?
-
-    general_info = amazon_info.nil? ? ebay_info : amazon_info
-
-    if !general_info.nil?
-      titles.uniq!
-      game = get_game(titles, general_info[:platform])
+    if search_params[:id_type] == 'UPC'
+      game = Game.where(upc: params[:id]).first
     else
-      game = nil
+      game = Game.where(ean: params[:id]).first
+    end
+
+    if game.nil?
+      titles = []
+      amazon_info = get_amazon_info(search_params)
+      titles.push( amazon_info[:title] ) if !amazon_info.nil?
+      ebay_info = get_ebay_info(search_params)
+      titles.push( ebay_info[:title] ) if !ebay_info.nil?
+
+      general_info = amazon_info.nil? ? ebay_info : amazon_info
+
+      if !general_info.nil?
+        titles.uniq!
+        game = get_game_by_title_variants(titles, general_info[:platform])
+        if !game.nil?
+          game.update(search_params[:id_type].downcase.to_sym => params[:id])
+        end
+      else
+        game = nil
+      end
     end
 
     if game.nil?
       render :json => '', :status => 404
     else
-      general_info[:title] = game.name
-      item_info = get_metacritic_info(game)
-      render :json => item_info.merge(general_info)
+      render :json => get_metacritic_info(game.metacritic_url)
+    end
+  end
+
+  def retrieve
+    data = get_metacritic_info(params[:url])
+
+    if data.nil?
+      render :json => '', :status => 404
+    else
+      render :json => data
     end
   end
 
@@ -47,14 +66,16 @@ class ApiController < ApplicationController
   private
 
   def retrieve_url(url)
-    return Net::HTTP.get(URI.parse(URI.escape(url.gsub(' ', '+'), '[]')))
+    uri = URI.parse(URI.escape(url.gsub(' ', '+'), '[]'))
+    result = Net::HTTP.start(uri.host, uri.port) { |http| http.get(uri.path) }
+    return result.code == '200' ? result.body : nil
   end
 
   def dom_extract(root, values)
     values.each_with_object({}) do |(name, selector), h|
       if selector.is_a?(Array)
-        selector = selector[0]
         property = selector[1]
+        selector = selector[0]
       else
         property = nil
       end
@@ -80,7 +101,8 @@ class ApiController < ApplicationController
         score: '.metascore',
         platform: '.platform',
         release_date: '.release_date .data',
-        publisher: '.publisher .data'
+        publisher: '.publisher .data',
+        url: ['.product_title a', 'href']
       })
     end
   end
@@ -103,7 +125,7 @@ class ApiController < ApplicationController
     end
   end
 
-  def get_game(titles, platform)
+  def get_game_by_title_variants(titles, platform)
     game = Game.where(name: titles, platform: platform).take
     if game.nil?
       url = nil
@@ -198,14 +220,15 @@ class ApiController < ApplicationController
   METACRITIC_BASE_URL = "http://www.metacritic.com"
   METACRITIC_SEARCH_URL = METACRITIC_BASE_URL + "/search/game/%s/results?plats[%s]=1&search_type=advanced"
 
-  def get_metacritic_info(game)
-    game_url = ApiController::METACRITIC_BASE_URL + game.metacritic_url
-    game_page = CachedPage.where(url: game_url).first
+  def get_metacritic_info(url)
+    full_url = ApiController::METACRITIC_BASE_URL + url
+    game_page = CachedPage.where(url: url).first
     if game_page.nil?
-      game_html = retrieve_url(game_url)
+      game_html = retrieve_url(full_url)
+      return nil if game_html.nil?
       #some pages on metacritic contain invalid UTF-8 sequences
       game_html = game_html.force_encoding("utf-8").encode("utf-8", "binary", :undef => :replace)
-      game_page = CachedPage.create(url: game_url, content: game_html)
+      game_page = CachedPage.create(url: full_url, content: game_html)
     end
 
     game_doc = Nokogiri::HTML(game_page.content)
@@ -213,6 +236,8 @@ class ApiController < ApplicationController
     user_score_el = game_doc.at_css('.product_scores .feature_userscore .count a')
 
     dom_extract(game_doc, {
+      title: '.content_head .product_title a',
+      platform: '.content_head .platform a',
       score: '.product_scores .metascore .score_value',
       user_score: '.product_scores .avguserscore .score_value',
       release_date: '.product_data .release_data .data',
@@ -223,7 +248,7 @@ class ApiController < ApplicationController
       image_width: 98,
       image_height: nil
     }).merge({
-      metacritic_url: game.metacritic_url,
+      metacritic_url: url,
       critic_reviews: game_doc.css('.critic_reviews .review').map do |review|
         data = dom_extract(review, {
           name: '.review_critic a',

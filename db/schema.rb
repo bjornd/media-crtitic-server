@@ -11,7 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20130824201609) do
+ActiveRecord::Schema.define(version: 20130908113433) do
 
   create_table "cached_pages", force: true do |t|
     t.string   "url"
@@ -27,6 +27,8 @@ ActiveRecord::Schema.define(version: 20130824201609) do
     t.string   "metacritic_url"
     t.datetime "created_at"
     t.datetime "updated_at"
+    t.string   "upc"
+    t.string   "ean"
   end
 
 end
