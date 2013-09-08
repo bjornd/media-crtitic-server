@@ -16,23 +16,15 @@ class ApiController < ApplicationController
       return
     end
 
-    offers = []
     titles = []
     amazon_info = get_amazon_info(search_params)
-    if !amazon_info.nil?
-      offers.push( amazon_info.delete(:offer) )
-      titles.push( amazon_info[:title] )
-    end
+    titles.push( amazon_info[:title] ) if !amazon_info.nil?
     ebay_info = get_ebay_info(search_params)
-    if !ebay_info.nil?
-      offers.push( ebay_info.delete(:offer) )
-      titles.push( ebay_info[:title] )
-    end
+    titles.push( ebay_info[:title] ) !ebay_info.nil?
 
     general_info = amazon_info.nil? ? ebay_info : amazon_info
 
     if !general_info.nil?
-      general_info[:offers] = offers
       titles.uniq!
       game = get_game(titles, general_info[:platform])
     else
@@ -143,11 +135,11 @@ class ApiController < ApplicationController
       image_url: image.get('URL'),
       image_width: image.get('Width'),
       image_height: image.get('Height'),
-      offer: {
-        name: 'Amazon',
-        price: item.get_element('OfferSummary').get_element('LowestNewPrice').get('FormattedPrice'),
-        url: 'http://www.amazon.com/dp/'+item.get('ASIN')
-      }
+      #offer: {
+      #  name: 'Amazon',
+      #  price: item.get_element('OfferSummary').get_element('LowestNewPrice').get('FormattedPrice'),
+      #  url: 'http://www.amazon.com/dp/'+item.get('ASIN')
+      #}
     }
   end
 
@@ -176,11 +168,11 @@ class ApiController < ApplicationController
       title: specifics.find{ |item| item["Name"] == 'Game' }["Value"].gsub(/-.*/, '').gsub(/\(.*?\)/, '').strip,
       platform: platform,
       image_url: details["StockPhotoURL"] ? details["StockPhotoURL"].sub('_6', '_7') : nil,
-      offer: {
-        name: 'eBay',
-        price: '$'+sprintf("%0.02f", res.response["ItemArray"]["Item"][0]["ConvertedCurrentPrice"]["Value"]),
-        url: 'http://www.ebay.com/ctg/'+reference_id
-      }
+      #offer: {
+      #  name: 'eBay',
+      #  price: '$'+sprintf("%0.02f", res.response["ItemArray"]["Item"][0]["ConvertedCurrentPrice"]["Value"]),
+      #  url: 'http://www.ebay.com/ctg/'+reference_id
+      #}
     }
   end
 
@@ -227,6 +219,9 @@ class ApiController < ApplicationController
       maturity_rating: '.product_details .product_rating .data',
       publisher: '.product_data .publisher .data a',
       critic_reviews_total: '.product_scores .metascore_summary .count a span',
+      image_url: ['img.product_image', 'src'],
+      image_width: 98,
+      image_height: nil
     }).merge({
       metacritic_url: game.metacritic_url,
       critic_reviews: game_doc.css('.critic_reviews .review').map do |review|
