@@ -1,6 +1,6 @@
 require 'test_helper'
 
-class ApiControllerTest < ActionController::TestCase
+class Api::GamesControllerTest < ActionController::TestCase
   def get_match
     [:method, VCR.request_matchers.uri_without_params(:Timestamp, :Signature)]
   end

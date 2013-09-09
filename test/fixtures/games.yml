@@ -1,11 +1,6 @@
-# Read about fixtures at http://api.rubyonrails.org/classes/ActiveRecord/Fixtures.html
-
-one:
-  name: MyString
-  platform: MyString
-  metacritic_url: MyString
-
-two:
-  name: MyString
-  platform: MyString
-  metacritic_url: MyString
+resistance3:
+  id: 1
+  name: Resistance 3
+  platform: PlayStation 3
+  metacritic_url: /game/playstation-3/resistance-3
+  upc: '711719817628'

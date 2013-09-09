@@ -23,19 +23,19 @@ http_interactions:
       Server:
       - Apache
       X-Varnish:
-      - '1119717799'
+      - '1782180270'
       Vary:
       - Accept-Encoding
       Date:
-      - Mon, 09 Sep 2013 14:26:16 GMT
+      - Mon, 09 Sep 2013 14:32:01 GMT
       Transfer-Encoding:
       - chunked
       Connection:
       - Transfer-Encoding
       - keep-alive
       Set-Cookie:
-      - ctk=NTIyZGRhODc2ZDZlZjEzMmM5MmJhMzJlM2ZmNA%3D%3D; expires=Sat, 08-Mar-2014
-        14:26:15 GMT; path=/; domain=.metacritic.com
+      - ctk=NTIyZGRiZTA2ZDZlZjEzMmI5NzU2ZjE1YmY2NA%3D%3D; expires=Sat, 08-Mar-2014
+        14:32:00 GMT; path=/; domain=.metacritic.com
     body:
       encoding: ASCII-8BIT
       string: !binary |-
@@ -93,7 +93,7 @@ http_interactions:
         dGVBZHNQYWdlUGFyYW1zIiBjb250ZW50PSJ7J3NlcnZpY2UnOidtYWRpc29u
         JywnY2xpZW50JzonbWFudGFyYXknLCdwYXJhbXMnOnsnU0lURSc6NTAsJ0JS
         QU5EJzoyMSwnTkNBVCc6JzEyNDU3OjEyNDU5JywnTk9ERSc6JzEyNDU5Jywn
-        UFRZUEUnOic2MzQ2JywnUEdVSUQnOic1MjJkZGE4N2NkNDE5JywnU1RBR0lO
+        UFRZUEUnOic2MzQ2JywnUEdVSUQnOic1MjJkZGJlMDcxZGU1JywnU1RBR0lO
         Ryc6MCwnRFZBUl9SRUxFQVNFJzonTk8nLCdEVkFSX01FVEFTQ09SRSc6J1lF
         UycsJ0RWQVJfVVNFUlNDT1JFJzonWUVTJywnRFZBUl9HU0VTUkInOidNJywn
         RFZBUl9NRVRBR0FNRUlEJzonMTU0OTQ5J30sJ2xvY2FsUGFnZSc6J1wvXC93
@@ -115,7 +115,7 @@ http_interactions:
         ICAgICA8c2NyaXB0PgogICAgCXZhciB0ZW1wVmFyID0geydzZXJ2aWNlJzon
         bWFkaXNvbicsJ2NsaWVudCc6J21hbnRhcmF5JywncGFyYW1zJzp7J1NJVEUn
         OjUwLCdCUkFORCc6MjEsJ05DQVQnOicxMjQ1NzoxMjQ1OScsJ05PREUnOicx
-        MjQ1OScsJ1BUWVBFJzonNjM0NicsJ1BHVUlEJzonNTIyZGRhODdjZDQxOScs
+        MjQ1OScsJ1BUWVBFJzonNjM0NicsJ1BHVUlEJzonNTIyZGRiZTA3MWRlNScs
         J1NUQUdJTkcnOjAsJ0RWQVJfUkVMRUFTRSc6J05PJywnRFZBUl9NRVRBU0NP
         UkUnOidZRVMnLCdEVkFSX1VTRVJTQ09SRSc6J1lFUycsJ0RWQVJfR1NFU1JC
         JzonTScsJ0RWQVJfTUVUQUdBTUVJRCc6JzE1NDk0OSd9LCdsb2NhbFBhZ2Un
@@ -3416,8 +3416,8 @@ http_interactions:
         RVVNUS5mO307TlJFVU1RLnB1c2goWyJucmZqIiwiYmVhY29uLTYubmV3cmVs
         aWMuY29tIiwiODYwZjc2NDRiOCIsIjIwMzMwMDIiLCJNZ1FFWjBkWUN4RUFW
         UkJiRFF0T0pVWkdUUW9QVG5FRlh3YzFFd2xYUUZvUldGdGZDbFlISFE9PSIs
-        MCw4NTIsbmV3IERhdGUoKS5nZXRUaW1lKCksIiIsIiIsIiIsIiIsIiJdKTs8
-        L3NjcmlwdD4KPC9ib2R5Pgo8L2h0bWw+Cgo=
+        MCwxMzI4LG5ldyBEYXRlKCkuZ2V0VGltZSgpLCIiLCIiLCIiLCIiLCIiXSk7
+        PC9zY3JpcHQ+CjwvYm9keT4KPC9odG1sPgoK
     http_version: 
-  recorded_at: Mon, 09 Sep 2013 14:26:16 GMT
+  recorded_at: Mon, 09 Sep 2013 14:32:02 GMT
 recorded_with: VCR 2.5.0

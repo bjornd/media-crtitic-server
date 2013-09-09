@@ -1,5 +1,8 @@
 MediaCriticServer::Application.routes.draw do
-  get 'api/lookup/:id' => 'api#lookup'
-  get 'api/search' => 'api#search'
-  get 'api/retrieve' => 'api#retrieve'
+  namespace :api do
+    get 'lookup/:id' => 'games#lookup'
+    get 'search' => 'games#search'
+    get 'retrieve' => 'games#retrieve'
+    get 'games/:id/comments/:type' => 'comments#list'
+  end
 end

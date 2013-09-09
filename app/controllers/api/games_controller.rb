@@ -1,7 +1,4 @@
-require 'net/http'
-require 'nokogiri'
-
-class ApiController < ApplicationController
+class Api::GamesController < ApplicationController
   def lookup
     search_params = {id: params[:id]}
 
@@ -65,38 +62,15 @@ class ApiController < ApplicationController
 
   private
 
-  def retrieve_url(url)
-    uri = URI.parse(URI.escape(url.gsub(' ', '+'), '[]'))
-    result = Net::HTTP.start(uri.host, uri.port) { |http| http.get(uri.path) }
-    return result.code == '200' ? result.body : nil
-  end
-
-  def dom_extract(root, values)
-    values.each_with_object({}) do |(name, selector), h|
-      if selector.is_a?(Array)
-        property = selector[1]
-        selector = selector[0]
-      else
-        property = nil
-      end
-      el = root.at_css(selector)
-      if el.nil?
-        h[name] = nil
-      else
-        h[name] = property.nil? ? el.content.strip : el[property]
-      end
-    end
-  end
-
   def search_metacritic(title, platform=nil)
     search_url = sprintf(
-      ApiController::METACRITIC_SEARCH_URL,
+      Api::GamesController::METACRITIC_SEARCH_URL,
       title,
       platform.nil? ? '' : ApiController::METACRITIC_PLATFORMS[platform]
     )
-    search_doc = Nokogiri::HTML(retrieve_url(search_url))
+    search_doc = Nokogiri::HTML(Net::HTTP.retrieve(search_url))
     search_doc.css('.search_results .result').map do |result|
-      dom_extract(result, {
+      result.extract({
         title: '.product_title a',
         score: '.metascore',
         platform: '.platform',
@@ -113,7 +87,7 @@ class ApiController < ApplicationController
       title,
       platform.nil? ? '' : ApiController::METACRITIC_PLATFORMS[platform]
     )
-    search_doc = Nokogiri::HTML(retrieve_url(search_url))
+    search_doc = Nokogiri::HTML(Net::HTTP.retrieve(search_url))
     search_result = search_doc.css('.search_results .result').select do |result|
       result.at_css('.product_title a').content == title
     end.first
@@ -221,21 +195,16 @@ class ApiController < ApplicationController
   METACRITIC_SEARCH_URL = METACRITIC_BASE_URL + "/search/game/%s/results?plats[%s]=1&search_type=advanced"
 
   def get_metacritic_info(url)
-    full_url = ApiController::METACRITIC_BASE_URL + url
-    game_page = CachedPage.where(url: url).first
-    if game_page.nil?
-      game_html = retrieve_url(full_url)
-      return nil if game_html.nil?
-      #some pages on metacritic contain invalid UTF-8 sequences
-      game_html = game_html.force_encoding("utf-8").encode("utf-8", "binary", :undef => :replace)
-      game_page = CachedPage.create(url: full_url, content: game_html)
-    end
+    full_url = Api::GamesController::METACRITIC_BASE_URL + url
+    html = CachedPage.get_html(full_url)
 
-    game_doc = Nokogiri::HTML(game_page.content)
+    return nil if html.nil?
 
-    user_score_el = game_doc.at_css('.product_scores .feature_userscore .count a')
+    document = Nokogiri::HTML(html)
 
-    dom_extract(game_doc, {
+    user_score_el = document.at_css('.product_scores .feature_userscore .count a')
+
+    document.extract({
       title: '.content_head .product_title a',
       platform: '.content_head .platform a',
       score: '.product_scores .metascore .score_value',
@@ -249,28 +218,6 @@ class ApiController < ApplicationController
       image_height: nil
     }).merge({
       metacritic_url: url,
-      critic_reviews: game_doc.css('.critic_reviews .review').map do |review|
-        data = dom_extract(review, {
-          name: '.review_critic a',
-          date: '.review_critic .date',
-          score: '.review_grade',
-          content: '.review_body',
-          link: ['.full_review a', 'href']
-        })
-      end,
-      user_reviews: game_doc.css('.user_reviews .review').map do |review|
-        if review.at_css('.blurb_etc').nil?
-          content = review.at_css('.review_body').content.strip
-        else
-          content = review.at_css('.blurb_collapsed').content + review.at_css('.blurb_expanded').content
-        end
-        dom_extract(review, {
-          name: '.review_critic a, .review_critic span',
-          score: '.review_grade'
-        }).merge({
-          content: content
-        })
-      end,
       user_reviews_total: user_score_el.nil? ? nil : user_score_el.content.split(' ', 2).first
     })
   end

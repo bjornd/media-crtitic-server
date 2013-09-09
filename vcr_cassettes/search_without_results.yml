@@ -23,19 +23,19 @@ http_interactions:
       Server:
       - Apache
       X-Varnish:
-      - '772588784'
+      - '812829502'
       Vary:
       - Accept-Encoding
       Date:
-      - Sun, 08 Sep 2013 13:59:11 GMT
+      - Mon, 09 Sep 2013 14:26:15 GMT
       Transfer-Encoding:
       - chunked
       Connection:
       - Transfer-Encoding
       - keep-alive
       Set-Cookie:
-      - ctk=NTIyYzgyYWY2ZDZlZjEzMmU0YTc4OTQ2NmIxMg%3D%3D; expires=Fri, 07-Mar-2014
-        13:59:11 GMT; path=/; domain=.metacritic.com
+      - ctk=NTIyZGRhODc2ZDZlZjEzMmI2MDMzZTk0MWM0Yw%3D%3D; expires=Sat, 08-Mar-2014
+        14:26:15 GMT; path=/; domain=.metacritic.com
     body:
       encoding: UTF-8
       string: "<!DOCTYPE html PUBLIC \"-//W3C//DTD HTML 4.01//EN\"\n   \"http://www.w3.org/TR/html4/strict.dtd\">\n<html
@@ -49,13 +49,13 @@ http_interactions:
         content=\"NOINDEX, FOLLOW\">\n\n\n    \n    <meta name=\"application-name\"
         content=\"Metacritic\"/>\n    <meta name=\"msapplication-TileColor\" content=\"#000000\"/>\n
         \   <meta name=\"msapplication-TileImage\" content=\"/images/win8tile/76bf1426-2886-4b87-ae1c-06424b6bb8a2.png\"/>\n\n
-        \   \n    \n    \n    <meta id=\"siteAdsPageParams\" content=\"{'service':'madison','client':'mantaray','params':{'SITE':50,'BRAND':21,'NCAT':'1','NODE':'1','PTYPE':'6056','PGUID':'522c82afcd623','STAGING':0},'localPage':'\\/\\/www.metacritic.com\\/static\\/adframes\\/mantaray\\/MantaRay_LocalPage.html','script':'http:\\/\\/i.i.cbsi.com\\/cnwk.1d\\/Ads\\/common\\/manta\\/adFunctionsD-metacritic.js'}\"
+        \   \n    \n    \n    <meta id=\"siteAdsPageParams\" content=\"{'service':'madison','client':'mantaray','params':{'SITE':50,'BRAND':21,'NCAT':'1','NODE':'1','PTYPE':'6056','PGUID':'522dda8702488','STAGING':0},'localPage':'\\/\\/www.metacritic.com\\/static\\/adframes\\/mantaray\\/MantaRay_LocalPage.html','script':'http:\\/\\/i.i.cbsi.com\\/cnwk.1d\\/Ads\\/common\\/manta\\/adFunctionsD-metacritic.js'}\"
         />\n\n    \n    \n    <link rel=\"stylesheet\" href=\"/css/global.min.1377816691.css\"
         type=\"text/css\">\n<link rel=\"stylesheet\" href=\"/css/search/base.min.1377816609.css\"
         type=\"text/css\">\n\n\n    \n        \n    \n\t\t\t\n\t\t\t\t    \n\n    \n
         \   \n    <script type=\"text/javascript\" src=\"/js/global.min.1377816691.js\"></script>\n\n
         \           <script src= \"http://i.i.cbsi.com/cnwk.1d/Ads/common/manta/adFunctionsD-metacritic.js\"></script>\n
-        \       <script>\n    \tvar tempVar = {'service':'madison','client':'mantaray','params':{'SITE':50,'BRAND':21,'NCAT':'1','NODE':'1','PTYPE':'6056','PGUID':'522c82afcd623','STAGING':0},'localPage':'\\/\\/www.metacritic.com\\/static\\/adframes\\/mantaray\\/MantaRay_LocalPage.html','script':'http:\\/\\/i.i.cbsi.com\\/cnwk.1d\\/Ads\\/common\\/manta\\/adFunctionsD-metacritic.js'};\n\t\tvar
+        \       <script>\n    \tvar tempVar = {'service':'madison','client':'mantaray','params':{'SITE':50,'BRAND':21,'NCAT':'1','NODE':'1','PTYPE':'6056','PGUID':'522dda8702488','STAGING':0},'localPage':'\\/\\/www.metacritic.com\\/static\\/adframes\\/mantaray\\/MantaRay_LocalPage.html','script':'http:\\/\\/i.i.cbsi.com\\/cnwk.1d\\/Ads\\/common\\/manta\\/adFunctionsD-metacritic.js'};\n\t\tvar
         cbsiAdGlobal = tempVar.params;\n\t\tcbsiRegisterAdGlobals(cbsiAdGlobal);\n\t\tcbsiSetDeferredLocalPage('/manta_ray_local_page.html');\n\t\tvar
         cbsiAdIntromercial = { 'SP': '80', 'POS': '100' };\n\t\tcbsiGetAd(cbsiAdIntromercial);\t\t\n\t</script>\n\n\t<script
         type=\"text/javascript\">\n\t\t\n\t    (function(d,c){var a,b,g,e;a=d.createElement(\"script\");a.type=\"text/javascript\";\n\t
@@ -454,8 +454,8 @@ http_interactions:
         fjs);\n        }(document, 'script', 'facebook-jssdk'));\n        \n    </script>\n\n
         \   \n    \n    <script>!function(d,s,id){var js,fjs=d.getElementsByTagName(s)[0];if(!d.getElementById(id)){js=d.createElement(s);js.id=id;js.src=\"https://platform.twitter.com/widgets.js\";fjs.parentNode.insertBefore(js,fjs);}}(document,\"script\",\"twitter-wjs\");</script>\n
         \   \n\n\n</div>\n\n<script type=\"text/javascript\">if(!NREUMQ.f){NREUMQ.f=function(){NREUMQ.push([\"load\",new
-        Date().getTime()]);var e=document.createElement(\"script\");e.type=\"text/javascript\";e.src=((\"http:\"===document.location.protocol)?\"http:\":\"https:\")+\"//\"+\"js-agent.newrelic.com/nr-100.js\";document.body.appendChild(e);if(NREUMQ.a)NREUMQ.a();};NREUMQ.a=window.onload;window.onload=NREUMQ.f;};NREUMQ.push([\"nrfj\",\"beacon-6.newrelic.com\",\"860f7644b8\",\"2033002\",\"MgQEZ0dYCxEAVRBbDQtOJUZGTQoPTmUBUxAGCVwJR1wWFw1CFw==\",0,240,new
+        Date().getTime()]);var e=document.createElement(\"script\");e.type=\"text/javascript\";e.src=((\"http:\"===document.location.protocol)?\"http:\":\"https:\")+\"//\"+\"js-agent.newrelic.com/nr-100.js\";document.body.appendChild(e);if(NREUMQ.a)NREUMQ.a();};NREUMQ.a=window.onload;window.onload=NREUMQ.f;};NREUMQ.push([\"nrfj\",\"beacon-6.newrelic.com\",\"860f7644b8\",\"2033002\",\"MgQEZ0dYCxEAVRBbDQtOJUZGTQoPTmUBUxAGCVwJR1wWFw1CFw==\",0,249,new
         Date().getTime(),\"\",\"\",\"\",\"\",\"\"]);</script>\n</body>\n</html>\n\n"
     http_version: 
-  recorded_at: Sun, 08 Sep 2013 13:59:12 GMT
+  recorded_at: Mon, 09 Sep 2013 14:26:15 GMT
 recorded_with: VCR 2.5.0

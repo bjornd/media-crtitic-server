@@ -2,7 +2,7 @@
 http_interactions:
 - request:
     method: get
-    uri: http://ecs.amazonaws.com/onca/xml?AWSAccessKeyId=AKIAIX2FSICCF6LXY4VA&AssociateTag=associate_tag&IdType=UPC&ItemId=111111111111&Operation=ItemLookup&ResponseGroup=ItemAttributes,Images,Offers&SearchIndex=All&Signature=2k1EPWwJ1fMZ9%2Bvhkf6pKRXwF6q36qmvzR2GDX1Etag=&Timestamp=2013-09-08T13:59:07Z
+    uri: http://ecs.amazonaws.com/onca/xml?AWSAccessKeyId=AKIAIX2FSICCF6LXY4VA&AssociateTag=associate_tag&IdType=UPC&ItemId=111111111111&Operation=ItemLookup&ResponseGroup=ItemAttributes,Images,Offers&SearchIndex=All&Signature=0zKLDNyHjAcvLr5LQ2vE28CAGrLWb7QCp9nOipkf77E=&Timestamp=2013-09-09T14:26:12Z
     body:
       encoding: US-ASCII
       string: ''
@@ -21,7 +21,7 @@ http_interactions:
       message: OK
     headers:
       Date:
-      - Sun, 08 Sep 2013 13:59:08 GMT
+      - Mon, 09 Sep 2013 14:26:12 GMT
       Server:
       - Server
       Content-Type:
@@ -35,17 +35,17 @@ http_interactions:
     body:
       encoding: UTF-8
       string: <?xml version="1.0" ?><ItemLookupResponse xmlns="http://webservices.amazon.com/AWSECommerceService/2011-08-01"><OperationRequest><HTTPHeaders><Header
-        Name="UserAgent" Value="Ruby"></Header></HTTPHeaders><RequestId>f1c8a1ec-2965-4a0a-9193-00715b8874e6</RequestId><Arguments><Argument
+        Name="UserAgent" Value="Ruby"></Header></HTTPHeaders><RequestId>7f0fee54-ea94-4a56-a338-f3c2899e206e</RequestId><Arguments><Argument
         Name="Operation" Value="ItemLookup"></Argument><Argument Name="Signature"
-        Value="2k1EPWwJ1fMZ9+vhkf6pKRXwF6q36qmvzR2GDX1Etag="></Argument><Argument
+        Value="0zKLDNyHjAcvLr5LQ2vE28CAGrLWb7QCp9nOipkf77E="></Argument><Argument
         Name="AssociateTag" Value="associate_tag"></Argument><Argument Name="ItemId"
         Value="111111111111"></Argument><Argument Name="IdType" Value="UPC"></Argument><Argument
         Name="AWSAccessKeyId" Value="AKIAIX2FSICCF6LXY4VA"></Argument><Argument Name="Timestamp"
-        Value="2013-09-08T13:59:07Z"></Argument><Argument Name="ResponseGroup" Value="ItemAttributes,Images,Offers"></Argument><Argument
-        Name="SearchIndex" Value="All"></Argument><Argument Name="Service" Value="AWSECommerceService"></Argument></Arguments><RequestProcessingTime>0.0302450000000000</RequestProcessingTime></OperationRequest><Items><Request><IsValid>True</IsValid><ItemLookupRequest><IdType>UPC</IdType><ItemId>111111111111</ItemId><ResponseGroup>ItemAttributes</ResponseGroup><ResponseGroup>Images</ResponseGroup><ResponseGroup>Offers</ResponseGroup><SearchIndex>All</SearchIndex><VariationPage>All</VariationPage></ItemLookupRequest><Errors><Error><Code>AWS.InvalidParameterValue</Code><Message>111111111111
+        Value="2013-09-09T14:26:12Z"></Argument><Argument Name="ResponseGroup" Value="ItemAttributes,Images,Offers"></Argument><Argument
+        Name="SearchIndex" Value="All"></Argument><Argument Name="Service" Value="AWSECommerceService"></Argument></Arguments><RequestProcessingTime>0.0373170000000000</RequestProcessingTime></OperationRequest><Items><Request><IsValid>True</IsValid><ItemLookupRequest><IdType>UPC</IdType><ItemId>111111111111</ItemId><ResponseGroup>ItemAttributes</ResponseGroup><ResponseGroup>Images</ResponseGroup><ResponseGroup>Offers</ResponseGroup><SearchIndex>All</SearchIndex><VariationPage>All</VariationPage></ItemLookupRequest><Errors><Error><Code>AWS.InvalidParameterValue</Code><Message>111111111111
         is not a valid value for ItemId. Please change this value and retry your request.</Message></Error></Errors></Request></Items></ItemLookupResponse>
     http_version: 
-  recorded_at: Sun, 08 Sep 2013 13:59:09 GMT
+  recorded_at: Mon, 09 Sep 2013 14:26:12 GMT
 - request:
     method: get
     uri: http://open.api.ebay.com/shopping?IncludeSelector=Details&ProductID.Value=111111111111&ProductID.type=UPC&appid=KirillLe-cf21-4352-b4a0-2dd677a4021e&callname=FindProducts&responseencoding=JSON&siteid=0&version=793
@@ -73,29 +73,29 @@ http_interactions:
       Expires:
       - Sat, 25 Dec 1999 00:00:00 GMT
       Last-Modified:
-      - Sun, 08 Sep 2013 13:59:10 GMT
+      - Mon, 09 Sep 2013 14:26:13 GMT
       Pragma:
       - no-cache
       Server:
       - Apache-Coyote/1.1
       X-Ebay-Api-Build-Tag:
-      - E837_CORE_APILW2_16317142_R1
+      - E839_CORE_APILW2_16349230_R1
       X-Ebay-Api-Pool-Name:
       - ___cDRidW9rdDdlaHFg
       X-Ebay-Api-Server-Name:
-      - ___dWtgMWQ3MmYrMTUyYCgyNSg+Nys3NzUrNzI0Pz43OzU=
+      - ___dm97MmQ3MmYrPmA1YigyNSg/Nys3PjMrNzUyPz43OzU=
       X-Ebay-Esb-Guid:
-      - urn:uuid:F7DDE35792BF3FFBCA46977883244295078-497990176
+      - urn:uuid:19C3F7ED4DBF5E209329149694088313337-885710279
       Date:
-      - Sun, 08 Sep 2013 13:59:10 GMT
+      - Mon, 09 Sep 2013 14:26:13 GMT
       Transfer-Encoding:
       - chunked
     body:
       encoding: UTF-8
-      string: '{"Timestamp":"2013-09-08T13:59:10.128Z","Ack":"Failure","Errors":[{"ShortMessage":"No
+      string: '{"Timestamp":"2013-09-09T14:26:13.638Z","Ack":"Failure","Errors":[{"ShortMessage":"No
         match found.","LongMessage":"No match found for your query. Please specify
         a broader query.","ErrorCode":"10.20","SeverityCode":"Error","ErrorParameters":[{"Value":"totalNumMatchingProducts
-        is zero","ParamID":"0"}],"ErrorClassification":"RequestError"}],"Build":"E837_CORE_APILW2_16317142_R1","Version":"837"}'
+        is zero","ParamID":"0"}],"ErrorClassification":"RequestError"}],"Build":"E839_CORE_APILW2_16349230_R1","Version":"839"}'
     http_version: 
-  recorded_at: Sun, 08 Sep 2013 13:59:10 GMT
+  recorded_at: Mon, 09 Sep 2013 14:26:13 GMT
 recorded_with: VCR 2.5.0
