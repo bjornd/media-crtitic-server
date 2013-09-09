@@ -66,7 +66,7 @@ class Api::GamesController < ApplicationController
     search_url = sprintf(
       Api::GamesController::METACRITIC_SEARCH_URL,
       title,
-      platform.nil? ? '' : ApiController::METACRITIC_PLATFORMS[platform]
+      platform.nil? ? '' : Api::GamesController::METACRITIC_PLATFORMS[platform]
     )
     search_doc = Nokogiri::HTML(Net::HTTP.retrieve(search_url))
     search_doc.css('.search_results .result').map do |result|
@@ -83,9 +83,9 @@ class Api::GamesController < ApplicationController
 
   def search_metacritic_one(title, platform)
     search_url = sprintf(
-      ApiController::METACRITIC_SEARCH_URL,
+      Api::GamesController::METACRITIC_SEARCH_URL,
       title,
-      platform.nil? ? '' : ApiController::METACRITIC_PLATFORMS[platform]
+      platform.nil? ? '' : Api::GamesController::METACRITIC_PLATFORMS[platform]
     )
     search_doc = Nokogiri::HTML(Net::HTTP.retrieve(search_url))
     search_result = search_doc.css('.search_results .result').select do |result|
@@ -126,7 +126,7 @@ class Api::GamesController < ApplicationController
     item_attributes = item.get_element('ItemAttributes')
 
     return {
-      title: item_attributes.get('Title').gsub(/-.*/, '').gsub(/\(.*?\)/, '').strip,
+      title: item_attributes.get('Title').gsub(/\u00a0/, ' ').gsub(/-.*/, '').gsub(/\(.*?\)/, '').strip,
       platform: item_attributes.get('Platform'),
       image_url: image.get('URL'),
       image_width: image.get('Width'),
@@ -158,7 +158,7 @@ class Api::GamesController < ApplicationController
     specifics = details["ItemSpecifics"]["NameValueList"]
 
     platform = specifics.find{ |item| item["Name"] == 'Platform' }["Value"]
-    platform = ApiController::EBAY_PLATFORMS[platform] if ApiController::EBAY_PLATFORMS.has_key?(platform)
+    platform = Api::GamesController::EBAY_PLATFORMS[platform] if Api::GamesController::EBAY_PLATFORMS.has_key?(platform)
 
     return {
       title: specifics.find{ |item| item["Name"] == 'Game' }["Value"].gsub(/-.*/, '').gsub(/\(.*?\)/, '').strip,
