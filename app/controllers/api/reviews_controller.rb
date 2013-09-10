@@ -1,15 +1,15 @@
-class Api::CommentsController < ApplicationController
+class Api::ReviewsController < ApplicationController
   rescue_from ActiveRecord::RecordNotFound do |exception|
     render json: '', status: 404
   end
 
   def list
-    if params[:type] == 'critics' || params[:type] == 'users'
+    if params[:type] == 'critic' || params[:type] == 'user'
       game = Game.find(params[:id])
       url = Api::GamesController::METACRITIC_BASE_URL + game.metacritic_url
       document = Nokogiri::HTML(CachedPage.get_html(url))
 
-      if params[:type] == 'critics'
+      if params[:type] == 'critic'
         data = document.css('.critic_reviews .review').map do |review|
           data = review.extract({
             name: '.review_critic a',

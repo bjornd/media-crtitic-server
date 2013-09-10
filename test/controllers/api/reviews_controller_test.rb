@@ -1,6 +1,6 @@
 require 'test_helper'
 
-class Api::CommentsControllerTest < ActionController::TestCase
+class Api::ReviewsControllerTest < ActionController::TestCase
   def get_match
     [:method, VCR.request_matchers.uri_without_params(:Timestamp, :Signature)]
   end
@@ -21,7 +21,7 @@ class Api::CommentsControllerTest < ActionController::TestCase
 
   test "critics comments retrieval" do
     VCR.use_cassette('critics comments retrieval', :match_requests_on => get_match) do
-      get(:list, id: games(:resistance3).id, type: 'critics')
+      get(:list, id: games(:resistance3).id, type: 'critic')
       assert_response :success
       body = JSON.parse(@response.body)
       assert_equal body.length, 7
@@ -35,7 +35,7 @@ class Api::CommentsControllerTest < ActionController::TestCase
 
   test "users comments retrieval" do
     VCR.use_cassette('critics comments retrieval', :match_requests_on => get_match) do
-      get(:list, id: games(:resistance3).id, type: 'users')
+      get(:list, id: games(:resistance3).id, type: 'user')
       assert_response :success
       body = JSON.parse(@response.body)
       assert_equal body.length, 7

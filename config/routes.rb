@@ -3,6 +3,6 @@ MediaCriticServer::Application.routes.draw do
     get 'lookup/:id' => 'games#lookup'
     get 'search' => 'games#search'
     get 'retrieve' => 'games#retrieve'
-    get 'games/:id/comments/:type' => 'comments#list'
+    get 'games/:id/reviews/:type' => 'reviews#list'
   end
 end

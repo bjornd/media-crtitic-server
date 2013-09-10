@@ -42,7 +42,7 @@ class Api::GamesController < ApplicationController
     if game.nil?
       render :json => '', :status => 404
     else
-      render :json => get_metacritic_info(game.metacritic_url)
+      render :json => get_metacritic_info(game.metacritic_url).merge({id: game.id})
     end
   end
 
@@ -52,7 +52,9 @@ class Api::GamesController < ApplicationController
     if data.nil?
       render :json => '', :status => 404
     else
-      render :json => data
+      game = Game.where(metacritic_url: params[:url]).take
+      game = Game.create(name: data[:title], platform: data[:platform], metacritic_url: params[:url]) if game.nil?
+      render :json => data.merge({id: game.id})
     end
   end
 
