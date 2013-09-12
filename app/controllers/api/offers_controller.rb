@@ -15,7 +15,7 @@ class Api::OffersController < ApplicationController
       item = res.items[0]
       offers = item.get_element('Offers')
       offer = offers.get_element('Offer')
-      render json: {
+      render json: [{
         url: 'http://www.amazon.com/dp/'+item.get('ASIN'),
         price: offer.get_element('OfferListing').get_element('Price').get('FormattedPrice'),
         saved: offer.get_element('OfferListing').get_element('AmountSaved').get('FormattedPrice'),
@@ -24,7 +24,7 @@ class Api::OffersController < ApplicationController
         lowest_used_price: item.get_element('OfferSummary').get_element('LowestUsedPrice').get('FormattedPrice'),
         total_new: item.get_element('OfferSummary').get('TotalNew'),
         total_used: item.get_element('OfferSummary').get('TotalUsed')
-      }
+      }]
     end
   end
 
@@ -45,7 +45,6 @@ class Api::OffersController < ApplicationController
     if res.failure?
       render json: nil, status: 404
     else
-      puts res.response
       items = res.response["ItemArray"]["Item"].map do |item|
         if item["ListingType"] == 'Chinese'
           data = {
