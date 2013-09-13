@@ -1,30 +1,59 @@
 class Api::OffersController < ApplicationController
+  AMAZON_CATEGORIES = {
+    "PlayStation 3" => '14210751',
+    "Xbox 360" => '14220161',
+    "PC" => '229575',
+    "DS" => '11075831',
+    "3DS" => '2622269011',
+    "PlayStation Vita" => '3010556011',
+    "PSP" => '11075221',
+    "Wii" => '14218901',
+    "Wii U" => '3075112011',
+    "PlayStation 2" => '301712',
+    "PlayStation" => '229773',
+    "Game Boy Advance" => '541020',
+    "Xbox" => '537504',
+    "GameCube" => '541022',
+    "Nintendo 64" => '229763',
+    "Dreamcast" => '1065996'
+  }
+
   def list_amazon
     game = Game.find(params[:id])
 
-    res = Amazon::Ecs.item_lookup(game.upc, {
-      id_type: 'UPC',
-      search_index: 'All',
-      response_group: 'Offers',
-      country: 'us'
-    })
+    if game.upc.nil?
+      update_ids(game)
+    end
 
-    if res.has_error?
-      render json: nil, status: 404
+    if !game.upc.nil?
+      res = Amazon::Ecs.item_lookup(game.upc, {
+        id_type: 'UPC',
+        search_index: 'VideoGames',
+        response_group: 'ItemAttributes,Offers,Images',
+        country: 'us'
+      })
+
+      if res.has_error?
+        render json: []
+      else
+        item = res.items[0]
+        render json: [extract_amazon_params(item, {
+          price: 'Offers Offer OfferListing Price FormattedPrice',
+          saved: 'Offers Offer OfferListing AmountSaved FormattedPrice',
+          condition: 'Offers Offer OfferAttributes Condition',
+          image_url: 'MediumImage URL',
+          image_width: 'MediumImage Width',
+          image_height: 'MediumImage Height',
+          lowest_new_price: 'OfferSummary LowestNewPrice FormattedPrice',
+          lowest_used_price: 'OfferSummary LowestUsedPrice FormattedPrice',
+          total_new: 'OfferSummary TotalNew',
+          total_used: 'OfferSummary TotalUsed'
+        }).merge({
+          url: 'http://www.amazon.com/dp/'+item.get('ASIN'),
+        })]
+      end
     else
-      item = res.items[0]
-      offers = item.get_element('Offers')
-      offer = offers.get_element('Offer')
-      render json: [{
-        url: 'http://www.amazon.com/dp/'+item.get('ASIN'),
-        price: offer.get_element('OfferListing').get_element('Price').get('FormattedPrice'),
-        saved: offer.get_element('OfferListing').get_element('AmountSaved').get('FormattedPrice'),
-        condition: offer.get_element('OfferAttributes').get('Condition'),
-        lowest_new_price: item.get_element('OfferSummary').get_element('LowestNewPrice').get('FormattedPrice'),
-        lowest_used_price: item.get_element('OfferSummary').get_element('LowestUsedPrice').get('FormattedPrice'),
-        total_new: item.get_element('OfferSummary').get('TotalNew'),
-        total_used: item.get_element('OfferSummary').get('TotalUsed')
-      }]
+      render json: []
     end
   end
 
@@ -71,5 +100,32 @@ class Api::OffersController < ApplicationController
       end
       render json: items.select { |item| !item[:type].nil? }
     end
+  end
+
+  private
+
+  def update_ids(game)
+    res = Amazon::Ecs.item_search(game.name, {
+      country: 'us',
+      sort: 'relevancerank',
+      browse_node: Api::OffersController::AMAZON_CATEGORIES[game.platform],
+      response_group: 'ItemAttributes'
+    })
+    item_attrs = res.items[0].get_element('ItemAttributes')
+    update_params = {}
+    update_params[:ean] = item_attrs.get('EAN') if item_attrs.get('EAN')
+    update_params[:upc] = item_attrs.get('UPC') if item_attrs.get('UPC')
+    game.update(update_params) if !update_params.empty?
+  end
+
+  def extract_amazon_params(root, params)
+    result = {}
+    params.each do |key, value|
+      node_names = value.split(' ')
+      last_node = node_names.pop
+      el = root.get_element(node_names.join(' '))
+      result[key] = el.nil? ? nil : el.get(last_node)
+    end
+    result
   end
 end
