@@ -37,8 +37,8 @@ class Api::OffersController < ApplicationController
         render json: []
       else
         result = get_amazon_best_result(res.items, game.name)
-        puts result
         render json: [extract_amazon_params(result, {
+          title: 'ItemAttributes Title',
           price: 'Offers Offer OfferListing Price FormattedPrice',
           saved: 'Offers Offer OfferListing AmountSaved FormattedPrice',
           condition: 'Offers Offer OfferAttributes Condition',
@@ -94,6 +94,7 @@ class Api::OffersController < ApplicationController
           title: item["Title"],
           start_time: item["StartTime"],
           end_time: item["EndTime"],
+          time_left: item["TimeLeft"],
           url: item["ViewItemURLForNaturalSearch"],
           image_url: item["GalleryURL"],
           price: currency + item["CurrentPrice"]["Value"].to_s
@@ -112,8 +113,6 @@ class Api::OffersController < ApplicationController
       title = item.get_element('ItemAttributes').get('Title')
       title = title.gsub(/\u00a0/, ' ').gsub(//, '').gsub(/\(.*?\)| -.*|\[.*?\]/, '').strip
       dist = Text::Levenshtein.distance(title, name)
-      puts title
-      puts dist
       if dist < min_dist
         result = item
         min_dist = dist
@@ -130,10 +129,7 @@ class Api::OffersController < ApplicationController
       response_group: 'ItemAttributes'
     })
 
-    puts res.doc
-
     result = get_amazon_best_result(res.items, game.name)
-    puts result
     item_attrs = result.get_element('ItemAttributes')
     update_params = {}
     update_params[:ean] = item_attrs.get('EAN') if item_attrs.get('EAN')
