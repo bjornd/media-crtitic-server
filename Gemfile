@@ -26,6 +26,8 @@ gem 'jbuilder', '~> 1.2'
 gem 'amazon-ecs'
 gem "rebay"
 
+gem "text"
+
 group :test do
   gem 'webmock'
   gem "vcr", "~> 2.5.0"

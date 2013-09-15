@@ -36,8 +36,9 @@ class Api::OffersController < ApplicationController
       if res.has_error?
         render json: []
       else
-        item = res.items[0]
-        render json: [extract_amazon_params(item, {
+        result = get_amazon_best_result(res.items, game.name)
+        puts result
+        render json: [extract_amazon_params(result, {
           price: 'Offers Offer OfferListing Price FormattedPrice',
           saved: 'Offers Offer OfferListing AmountSaved FormattedPrice',
           condition: 'Offers Offer OfferAttributes Condition',
@@ -49,7 +50,7 @@ class Api::OffersController < ApplicationController
           total_new: 'OfferSummary TotalNew',
           total_used: 'OfferSummary TotalUsed'
         }).merge({
-          url: 'http://www.amazon.com/dp/'+item.get('ASIN'),
+          url: 'http://www.amazon.com/dp/'+result.get('ASIN'),
         })]
       end
     else
@@ -104,6 +105,23 @@ class Api::OffersController < ApplicationController
 
   private
 
+  def get_amazon_best_result(items, name)
+    min_dist = 1024 #number greater than any game title
+    result = nil
+    items.each do |item|
+      title = item.get_element('ItemAttributes').get('Title')
+      title = title.gsub(/\u00a0/, ' ').gsub(//, '').gsub(/\(.*?\)| -.*|\[.*?\]/, '').strip
+      dist = Text::Levenshtein.distance(title, name)
+      puts title
+      puts dist
+      if dist < min_dist
+        result = item
+        min_dist = dist
+      end
+    end
+    result
+  end
+
   def update_ids(game)
     res = Amazon::Ecs.item_search(game.name, {
       country: 'us',
@@ -111,7 +129,12 @@ class Api::OffersController < ApplicationController
       browse_node: Api::OffersController::AMAZON_CATEGORIES[game.platform],
       response_group: 'ItemAttributes'
     })
-    item_attrs = res.items[0].get_element('ItemAttributes')
+
+    puts res.doc
+
+    result = get_amazon_best_result(res.items, game.name)
+    puts result
+    item_attrs = result.get_element('ItemAttributes')
     update_params = {}
     update_params[:ean] = item_attrs.get('EAN') if item_attrs.get('EAN')
     update_params[:upc] = item_attrs.get('UPC') if item_attrs.get('UPC')

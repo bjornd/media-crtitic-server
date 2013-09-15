@@ -59,19 +59,13 @@ class Api::GamesController < ApplicationController
   end
 
   def search
-    render :json => search_metacritic(params[:query])
-  end
-
-  private
-
-  def search_metacritic(title, platform=nil)
     search_url = sprintf(
       Api::GamesController::METACRITIC_SEARCH_URL,
-      title,
-      platform.nil? ? '' : Api::GamesController::METACRITIC_PLATFORMS[platform]
+      params[:query],
+      ''
     )
     search_doc = Nokogiri::HTML(Net::HTTP.retrieve(search_url))
-    search_doc.css('.search_results .result').map do |result|
+    results = search_doc.css('.search_results .result').map do |result|
       result.extract({
         title: '.product_title a',
         score: '.metascore',
@@ -81,7 +75,11 @@ class Api::GamesController < ApplicationController
         url: ['.product_title a', 'href']
       })
     end
+
+    render :json => results
   end
+
+  private
 
   def search_metacritic_one(title, platform)
     search_url = sprintf(
@@ -113,6 +111,10 @@ class Api::GamesController < ApplicationController
     game
   end
 
+  AMAZON_PLATFORMS = {
+    "PlayStation2" => "PlayStation 2"
+  }
+
   def get_amazon_info(params)
     res = Amazon::Ecs.item_lookup(params[:id], {
       id_type: params[:id_type],
@@ -127,17 +129,15 @@ class Api::GamesController < ApplicationController
     image = item.get_element('MediumImage')
     item_attributes = item.get_element('ItemAttributes')
 
+    platform = item_attributes.get('Platform')
+    platform = Api::GamesController::AMAZON_PLATFORMS[platform] if Api::GamesController::AMAZON_PLATFORMS.has_key?(platform)
+
     return {
       title: item_attributes.get('Title').gsub(/\u00a0/, ' ').gsub(/-.*/, '').gsub(/\(.*?\)/, '').strip,
-      platform: item_attributes.get('Platform'),
+      platform: platform,
       image_url: image.get('URL'),
       image_width: image.get('Width'),
       image_height: image.get('Height'),
-      #offer: {
-      #  name: 'Amazon',
-      #  price: item.get_element('OfferSummary').get_element('LowestNewPrice').get('FormattedPrice'),
-      #  url: 'http://www.amazon.com/dp/'+item.get('ASIN')
-      #}
     }
   end
 
@@ -166,11 +166,6 @@ class Api::GamesController < ApplicationController
       title: specifics.find{ |item| item["Name"] == 'Game' }["Value"].gsub(/-.*/, '').gsub(/\(.*?\)/, '').strip,
       platform: platform,
       image_url: details["StockPhotoURL"] ? details["StockPhotoURL"].sub('_6', '_7') : nil,
-      #offer: {
-      #  name: 'eBay',
-      #  price: '$'+sprintf("%0.02f", res.response["ItemArray"]["Item"][0]["ConvertedCurrentPrice"]["Value"]),
-      #  url: 'http://www.ebay.com/ctg/'+reference_id
-      #}
     }
   end
 

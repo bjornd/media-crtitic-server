@@ -1,7 +1,6 @@
 class << Net::HTTP
   def retrieve(url)
-    uri = URI.parse(URI.escape(url.gsub(' ', '+'), '[]'))
-    result = Net::HTTP.start(uri.host, uri.port) { |http| http.get(uri.path) }
-    return result.code == '200' ? result.body : nil
+    res = Net::HTTP.get_response( URI.parse(URI.escape(url.gsub(' ', '+'), '[]')) )
+    return res.code == '200' ? res.body : nil
   end
 end
