@@ -1,6 +1,6 @@
 class Api::OffersController < ApplicationController
   rescue_from ActiveRecord::RecordNotFound do |exception|
-    render json: '', status: 404
+    render json: {success: false}, status: 404
   end
 
   AMAZON_CATEGORIES = {
@@ -38,27 +38,30 @@ class Api::OffersController < ApplicationController
       })
 
       if res.has_error?
-        render json: []
+        render json: {success: true, data: []}
       else
         result = get_amazon_best_result(res.items, game.name)
-        render json: [extract_amazon_params(result, {
-          title: 'ItemAttributes Title',
-          price: 'Offers Offer OfferListing Price FormattedPrice',
-          saved: 'Offers Offer OfferListing AmountSaved FormattedPrice',
-          condition: 'Offers Offer OfferAttributes Condition',
-          image_url: 'MediumImage URL',
-          image_width: 'MediumImage Width',
-          image_height: 'MediumImage Height',
-          lowest_new_price: 'OfferSummary LowestNewPrice FormattedPrice',
-          lowest_used_price: 'OfferSummary LowestUsedPrice FormattedPrice',
-          total_new: 'OfferSummary TotalNew',
-          total_used: 'OfferSummary TotalUsed'
-        }).merge({
-          url: 'http://www.amazon.com/dp/'+result.get('ASIN'),
-        })]
+        render json: {
+          success: true,
+          data: [extract_amazon_params(result, {
+            title: 'ItemAttributes Title',
+            price: 'Offers Offer OfferListing Price FormattedPrice',
+            saved: 'Offers Offer OfferListing AmountSaved FormattedPrice',
+            condition: 'Offers Offer OfferAttributes Condition',
+            image_url: 'MediumImage URL',
+            image_width: 'MediumImage Width',
+            image_height: 'MediumImage Height',
+            lowest_new_price: 'OfferSummary LowestNewPrice FormattedPrice',
+            lowest_used_price: 'OfferSummary LowestUsedPrice FormattedPrice',
+            total_new: 'OfferSummary TotalNew',
+            total_used: 'OfferSummary TotalUsed'
+          }).merge({
+            url: 'http://www.amazon.com/dp/'+result.get('ASIN'),
+          })]
+        }
       end
     else
-      render json: []
+      render json: {success: true, data: []}
     end
   end
 
@@ -77,7 +80,7 @@ class Api::OffersController < ApplicationController
     })
 
     if res.failure?
-      render json: nil, status: 404
+      render json: {success: false}, status: 404
     else
       items = res.response["ItemArray"]["Item"].map do |item|
         if item["ListingType"] == 'Chinese'
@@ -104,7 +107,7 @@ class Api::OffersController < ApplicationController
           price: currency + item["CurrentPrice"]["Value"].to_s
         })
       end
-      render json: items.select { |item| !item[:type].nil? }
+      render json: {success: true, data: items.select { |item| !item[:type].nil? }}
     end
   end
 

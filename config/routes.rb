@@ -1,7 +1,7 @@
 MediaCriticServer::Application.routes.draw do
   namespace :api do
+    get 'search' => 'search#search'
     get 'lookup/:id' => 'games#lookup'
-    get 'search' => 'games#search'
     get 'retrieve' => 'games#retrieve'
     get 'games/:id/reviews/:type' => 'reviews#list'
     get 'games/:id/offers/amazon' => 'offers#list_amazon'

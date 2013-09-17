@@ -9,6 +9,8 @@ class Api::OffersControllerTest < ActionController::TestCase
     VCR.use_cassette('invalid comments', :match_requests_on => get_match) do
       get(:list_amazon, id: 0)
       assert_response :missing
+      body = JSON.parse(@response.body)
+      assert_equal body["success"], false
     end
   end
 
@@ -17,11 +19,12 @@ class Api::OffersControllerTest < ActionController::TestCase
       get(:list_amazon, id: games(:resistance3).id)
       assert_response :success
       body = JSON.parse(@response.body)
-      assert_equal body.length, 1
-      refute_nil body[0]["price"]
-      refute_nil body[0]["saved"]
-      refute_nil body[0]["condition"]
-      refute_nil body[0]["url"]
+      assert_equal body["success"], true
+      assert_equal body["data"].length, 1
+      refute_nil body["data"][0]["price"]
+      refute_nil body["data"][0]["saved"]
+      refute_nil body["data"][0]["condition"]
+      refute_nil body["data"][0]["url"]
     end
   end
 
@@ -30,12 +33,13 @@ class Api::OffersControllerTest < ActionController::TestCase
       get(:list_ebay, id: games(:resistance3).id)
       assert_response :success
       body = JSON.parse(@response.body)
-      assert body.length > 0
-      refute_nil body[0]["title"]
-      refute_nil body[0]["type"]
-      refute_nil body[0]["start_time"]
-      refute_nil body[0]["end_time"]
-      refute_nil body[0]["url"]
+      assert_equal body["success"], true
+      assert body["data"].length > 0
+      refute_nil body["data"][0]["title"]
+      refute_nil body["data"][0]["type"]
+      refute_nil body["data"][0]["start_time"]
+      refute_nil body["data"][0]["end_time"]
+      refute_nil body["data"][0]["url"]
     end
   end
 end

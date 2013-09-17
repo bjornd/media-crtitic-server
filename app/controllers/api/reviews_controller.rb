@@ -1,6 +1,6 @@
 class Api::ReviewsController < ApplicationController
   rescue_from ActiveRecord::RecordNotFound do |exception|
-    render json: '', status: 404
+    render json: {success: false}, status: 404
   end
 
   def list
@@ -35,9 +35,9 @@ class Api::ReviewsController < ApplicationController
         end
       end
 
-      render :json => data
+      render json: {success: true, data: data}
     else
-      render :json => '', :status => 404
+      render json: {success: false}, status: 404
     end
   end
 end

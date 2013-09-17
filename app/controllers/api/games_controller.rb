@@ -9,7 +9,7 @@ class Api::GamesController < ApplicationController
       search_params[:id_type] = 'EAN'
       search_params[:country] = 'uk'
     else
-      render :json => '', :status => 404
+      render :json => {success: false}, :status => 404
       return
     end
 
@@ -40,9 +40,9 @@ class Api::GamesController < ApplicationController
     end
 
     if game.nil?
-      render :json => '', :status => 404
+      render :json => {success: false}, :status => 404
     else
-      render :json => get_metacritic_info(game.metacritic_url).merge({id: game.id})
+      render :json => {success: true, data: get_metacritic_info(game.metacritic_url).merge({id: game.id})}
     end
   end
 
@@ -50,33 +50,12 @@ class Api::GamesController < ApplicationController
     data = get_metacritic_info(params[:url])
 
     if data.nil?
-      render :json => '', :status => 404
+      render :json => {success: false}, :status => 404
     else
       game = Game.where(metacritic_url: params[:url]).take
       game = Game.create(name: data[:title], platform: data[:platform], metacritic_url: params[:url]) if game.nil?
-      render :json => data.merge({id: game.id})
+      render json: {success: true, data: data.merge({id: game.id})}
     end
-  end
-
-  def search
-    search_url = sprintf(
-      Api::GamesController::METACRITIC_SEARCH_URL,
-      params[:query],
-      ''
-    )
-    search_doc = Nokogiri::HTML(Net::HTTP.retrieve(search_url))
-    results = search_doc.css('.search_results .result').map do |result|
-      result.extract({
-        title: '.product_title a',
-        score: '.metascore',
-        platform: '.platform',
-        release_date: '.release_date .data',
-        publisher: '.publisher .data',
-        url: ['.product_title a', 'href']
-      })
-    end
-
-    render :json => results
   end
 
   private
