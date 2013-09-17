@@ -1,4 +1,8 @@
 class Api::OffersController < ApplicationController
+  rescue_from ActiveRecord::RecordNotFound do |exception|
+    render json: '', status: 404
+  end
+
   AMAZON_CATEGORIES = {
     "PlayStation 3" => '14210751',
     "Xbox 360" => '14220161',

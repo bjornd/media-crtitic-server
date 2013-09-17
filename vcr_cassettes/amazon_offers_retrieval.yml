@@ -1,0 +1,128 @@
+---
+http_interactions:
+- request:
+    method: get
+    uri: http://ecs.amazonaws.com/onca/xml?AWSAccessKeyId=AKIAIX2FSICCF6LXY4VA&AssociateTag=associate_tag&IdType=UPC&ItemId=711719817628&Operation=ItemLookup&ResponseGroup=ItemAttributes,Offers,Images&SearchIndex=VideoGames&Signature=qBSDWKe9EK29g45/wT5E4EkPwSAUlyubTAqrrecH%2BUE=&Timestamp=2013-09-17T12:15:47Z
+    body:
+      encoding: US-ASCII
+      string: ''
+    headers:
+      Accept-Encoding:
+      - gzip;q=1.0,deflate;q=0.6,identity;q=0.3
+      Accept:
+      - '*/*'
+      User-Agent:
+      - Ruby
+      Host:
+      - ecs.amazonaws.com
+  response:
+    status:
+      code: 200
+      message: OK
+    headers:
+      Date:
+      - Tue, 17 Sep 2013 12:15:48 GMT
+      Server:
+      - Server
+      Content-Type:
+      - text/xml;charset=UTF-8
+      Vary:
+      - Accept-Encoding,User-Agent
+      Nncoection:
+      - close
+      Transfer-Encoding:
+      - chunked
+    body:
+      encoding: UTF-8
+      string: <?xml version="1.0" ?><ItemLookupResponse xmlns="http://webservices.amazon.com/AWSECommerceService/2011-08-01"><OperationRequest><HTTPHeaders><Header
+        Name="UserAgent" Value="Ruby"></Header></HTTPHeaders><RequestId>e8f3cb0d-3566-44c6-815c-01ccd1fd8349</RequestId><Arguments><Argument
+        Name="Operation" Value="ItemLookup"></Argument><Argument Name="AssociateTag"
+        Value="associate_tag"></Argument><Argument Name="SearchIndex" Value="VideoGames"></Argument><Argument
+        Name="Signature" Value="qBSDWKe9EK29g45/wT5E4EkPwSAUlyubTAqrrecH+UE="></Argument><Argument
+        Name="ItemId" Value="711719817628"></Argument><Argument Name="IdType" Value="UPC"></Argument><Argument
+        Name="AWSAccessKeyId" Value="AKIAIX2FSICCF6LXY4VA"></Argument><Argument Name="Timestamp"
+        Value="2013-09-17T12:15:47Z"></Argument><Argument Name="ResponseGroup" Value="ItemAttributes,Offers,Images"></Argument><Argument
+        Name="Service" Value="AWSECommerceService"></Argument></Arguments><RequestProcessingTime>0.0417720000000000</RequestProcessingTime></OperationRequest><Items><Request><IsValid>True</IsValid><ItemLookupRequest><IdType>UPC</IdType><ItemId>711719817628</ItemId><ResponseGroup>ItemAttributes</ResponseGroup><ResponseGroup>Offers</ResponseGroup><ResponseGroup>Images</ResponseGroup><SearchIndex>VideoGames</SearchIndex><VariationPage>All</VariationPage></ItemLookupRequest></Request><Item><ASIN>B003O6E67A</ASIN><ParentASIN>B0055Q175G</ParentASIN><DetailPageURL>http://www.amazon.com/Resistance-3-Playstation/dp/B003O6E67A%3FSubscriptionId%3DAKIAIX2FSICCF6LXY4VA%26tag%3Dassociate_tag%26linkCode%3Dxm2%26camp%3D2025%26creative%3D165953%26creativeASIN%3DB003O6E67A</DetailPageURL><ItemLinks><ItemLink><Description>Technical
+        Details</Description><URL>http://www.amazon.com/Resistance-3-Playstation/dp/tech-data/B003O6E67A%3FSubscriptionId%3DAKIAIX2FSICCF6LXY4VA%26tag%3Dassociate_tag%26linkCode%3Dxm2%26camp%3D2025%26creative%3D386001%26creativeASIN%3DB003O6E67A</URL></ItemLink><ItemLink><Description>Add
+        To Baby Registry</Description><URL>http://www.amazon.com/gp/registry/baby/add-item.html%3Fasin.0%3DB003O6E67A%26SubscriptionId%3DAKIAIX2FSICCF6LXY4VA%26tag%3Dassociate_tag%26linkCode%3Dxm2%26camp%3D2025%26creative%3D386001%26creativeASIN%3DB003O6E67A</URL></ItemLink><ItemLink><Description>Add
+        To Wedding Registry</Description><URL>http://www.amazon.com/gp/registry/wedding/add-item.html%3Fasin.0%3DB003O6E67A%26SubscriptionId%3DAKIAIX2FSICCF6LXY4VA%26tag%3Dassociate_tag%26linkCode%3Dxm2%26camp%3D2025%26creative%3D386001%26creativeASIN%3DB003O6E67A</URL></ItemLink><ItemLink><Description>Add
+        To Wishlist</Description><URL>http://www.amazon.com/gp/registry/wishlist/add-item.html%3Fasin.0%3DB003O6E67A%26SubscriptionId%3DAKIAIX2FSICCF6LXY4VA%26tag%3Dassociate_tag%26linkCode%3Dxm2%26camp%3D2025%26creative%3D386001%26creativeASIN%3DB003O6E67A</URL></ItemLink><ItemLink><Description>Tell
+        A Friend</Description><URL>http://www.amazon.com/gp/pdp/taf/B003O6E67A%3FSubscriptionId%3DAKIAIX2FSICCF6LXY4VA%26tag%3Dassociate_tag%26linkCode%3Dxm2%26camp%3D2025%26creative%3D386001%26creativeASIN%3DB003O6E67A</URL></ItemLink><ItemLink><Description>All
+        Customer Reviews</Description><URL>http://www.amazon.com/review/product/B003O6E67A%3FSubscriptionId%3DAKIAIX2FSICCF6LXY4VA%26tag%3Dassociate_tag%26linkCode%3Dxm2%26camp%3D2025%26creative%3D386001%26creativeASIN%3DB003O6E67A</URL></ItemLink><ItemLink><Description>All
+        Offers</Description><URL>http://www.amazon.com/gp/offer-listing/B003O6E67A%3FSubscriptionId%3DAKIAIX2FSICCF6LXY4VA%26tag%3Dassociate_tag%26linkCode%3Dxm2%26camp%3D2025%26creative%3D386001%26creativeASIN%3DB003O6E67A</URL></ItemLink></ItemLinks><SmallImage><URL>http://ecx.images-amazon.com/images/I/5115MDkgAIL._SL75_.jpg</URL><Height
+        Units="pixels">75</Height><Width Units="pixels">65</Width></SmallImage><MediumImage><URL>http://ecx.images-amazon.com/images/I/5115MDkgAIL._SL160_.jpg</URL><Height
+        Units="pixels">160</Height><Width Units="pixels">139</Width></MediumImage><LargeImage><URL>http://ecx.images-amazon.com/images/I/5115MDkgAIL.jpg</URL><Height
+        Units="pixels">500</Height><Width Units="pixels">435</Width></LargeImage><ImageSets><ImageSet
+        Category="primary"><SwatchImage><URL>http://ecx.images-amazon.com/images/I/5115MDkgAIL._SL30_.jpg</URL><Height
+        Units="pixels">30</Height><Width Units="pixels">26</Width></SwatchImage><SmallImage><URL>http://ecx.images-amazon.com/images/I/5115MDkgAIL._SL75_.jpg</URL><Height
+        Units="pixels">75</Height><Width Units="pixels">65</Width></SmallImage><ThumbnailImage><URL>http://ecx.images-amazon.com/images/I/5115MDkgAIL._SL75_.jpg</URL><Height
+        Units="pixels">75</Height><Width Units="pixels">65</Width></ThumbnailImage><TinyImage><URL>http://ecx.images-amazon.com/images/I/5115MDkgAIL._SL110_.jpg</URL><Height
+        Units="pixels">110</Height><Width Units="pixels">96</Width></TinyImage><MediumImage><URL>http://ecx.images-amazon.com/images/I/5115MDkgAIL._SL160_.jpg</URL><Height
+        Units="pixels">160</Height><Width Units="pixels">139</Width></MediumImage><LargeImage><URL>http://ecx.images-amazon.com/images/I/5115MDkgAIL.jpg</URL><Height
+        Units="pixels">500</Height><Width Units="pixels">435</Width></LargeImage></ImageSet><ImageSet
+        Category="variant"><SwatchImage><URL>http://ecx.images-amazon.com/images/I/41Uib6lnEgL._SL30_.jpg</URL><Height
+        Units="pixels">17</Height><Width Units="pixels">30</Width></SwatchImage><SmallImage><URL>http://ecx.images-amazon.com/images/I/41Uib6lnEgL._SL75_.jpg</URL><Height
+        Units="pixels">42</Height><Width Units="pixels">75</Width></SmallImage><ThumbnailImage><URL>http://ecx.images-amazon.com/images/I/41Uib6lnEgL._SL75_.jpg</URL><Height
+        Units="pixels">42</Height><Width Units="pixels">75</Width></ThumbnailImage><TinyImage><URL>http://ecx.images-amazon.com/images/I/41Uib6lnEgL._SL110_.jpg</URL><Height
+        Units="pixels">62</Height><Width Units="pixels">110</Width></TinyImage><MediumImage><URL>http://ecx.images-amazon.com/images/I/41Uib6lnEgL._SL160_.jpg</URL><Height
+        Units="pixels">90</Height><Width Units="pixels">160</Width></MediumImage><LargeImage><URL>http://ecx.images-amazon.com/images/I/41Uib6lnEgL.jpg</URL><Height
+        Units="pixels">281</Height><Width Units="pixels">500</Width></LargeImage></ImageSet><ImageSet
+        Category="variant"><SwatchImage><URL>http://ecx.images-amazon.com/images/I/41xzG4kKNTL._SL30_.jpg</URL><Height
+        Units="pixels">17</Height><Width Units="pixels">30</Width></SwatchImage><SmallImage><URL>http://ecx.images-amazon.com/images/I/41xzG4kKNTL._SL75_.jpg</URL><Height
+        Units="pixels">42</Height><Width Units="pixels">75</Width></SmallImage><ThumbnailImage><URL>http://ecx.images-amazon.com/images/I/41xzG4kKNTL._SL75_.jpg</URL><Height
+        Units="pixels">42</Height><Width Units="pixels">75</Width></ThumbnailImage><TinyImage><URL>http://ecx.images-amazon.com/images/I/41xzG4kKNTL._SL110_.jpg</URL><Height
+        Units="pixels">62</Height><Width Units="pixels">110</Width></TinyImage><MediumImage><URL>http://ecx.images-amazon.com/images/I/41xzG4kKNTL._SL160_.jpg</URL><Height
+        Units="pixels">90</Height><Width Units="pixels">160</Width></MediumImage><LargeImage><URL>http://ecx.images-amazon.com/images/I/41xzG4kKNTL.jpg</URL><Height
+        Units="pixels">281</Height><Width Units="pixels">500</Width></LargeImage></ImageSet><ImageSet
+        Category="variant"><SwatchImage><URL>http://ecx.images-amazon.com/images/I/51A7nroplNL._SL30_.jpg</URL><Height
+        Units="pixels">17</Height><Width Units="pixels">30</Width></SwatchImage><SmallImage><URL>http://ecx.images-amazon.com/images/I/51A7nroplNL._SL75_.jpg</URL><Height
+        Units="pixels">42</Height><Width Units="pixels">75</Width></SmallImage><ThumbnailImage><URL>http://ecx.images-amazon.com/images/I/51A7nroplNL._SL75_.jpg</URL><Height
+        Units="pixels">42</Height><Width Units="pixels">75</Width></ThumbnailImage><TinyImage><URL>http://ecx.images-amazon.com/images/I/51A7nroplNL._SL110_.jpg</URL><Height
+        Units="pixels">62</Height><Width Units="pixels">110</Width></TinyImage><MediumImage><URL>http://ecx.images-amazon.com/images/I/51A7nroplNL._SL160_.jpg</URL><Height
+        Units="pixels">90</Height><Width Units="pixels">160</Width></MediumImage><LargeImage><URL>http://ecx.images-amazon.com/images/I/51A7nroplNL.jpg</URL><Height
+        Units="pixels">281</Height><Width Units="pixels">500</Width></LargeImage></ImageSet><ImageSet
+        Category="variant"><SwatchImage><URL>http://ecx.images-amazon.com/images/I/51roumVHlQL._SL30_.jpg</URL><Height
+        Units="pixels">17</Height><Width Units="pixels">30</Width></SwatchImage><SmallImage><URL>http://ecx.images-amazon.com/images/I/51roumVHlQL._SL75_.jpg</URL><Height
+        Units="pixels">42</Height><Width Units="pixels">75</Width></SmallImage><ThumbnailImage><URL>http://ecx.images-amazon.com/images/I/51roumVHlQL._SL75_.jpg</URL><Height
+        Units="pixels">42</Height><Width Units="pixels">75</Width></ThumbnailImage><TinyImage><URL>http://ecx.images-amazon.com/images/I/51roumVHlQL._SL110_.jpg</URL><Height
+        Units="pixels">62</Height><Width Units="pixels">110</Width></TinyImage><MediumImage><URL>http://ecx.images-amazon.com/images/I/51roumVHlQL._SL160_.jpg</URL><Height
+        Units="pixels">90</Height><Width Units="pixels">160</Width></MediumImage><LargeImage><URL>http://ecx.images-amazon.com/images/I/51roumVHlQL.jpg</URL><Height
+        Units="pixels">281</Height><Width Units="pixels">500</Width></LargeImage></ImageSet><ImageSet
+        Category="variant"><SwatchImage><URL>http://ecx.images-amazon.com/images/I/41wUXRE57jL._SL30_.jpg</URL><Height
+        Units="pixels">17</Height><Width Units="pixels">30</Width></SwatchImage><SmallImage><URL>http://ecx.images-amazon.com/images/I/41wUXRE57jL._SL75_.jpg</URL><Height
+        Units="pixels">42</Height><Width Units="pixels">75</Width></SmallImage><ThumbnailImage><URL>http://ecx.images-amazon.com/images/I/41wUXRE57jL._SL75_.jpg</URL><Height
+        Units="pixels">42</Height><Width Units="pixels">75</Width></ThumbnailImage><TinyImage><URL>http://ecx.images-amazon.com/images/I/41wUXRE57jL._SL110_.jpg</URL><Height
+        Units="pixels">62</Height><Width Units="pixels">110</Width></TinyImage><MediumImage><URL>http://ecx.images-amazon.com/images/I/41wUXRE57jL._SL160_.jpg</URL><Height
+        Units="pixels">90</Height><Width Units="pixels">160</Width></MediumImage><LargeImage><URL>http://ecx.images-amazon.com/images/I/41wUXRE57jL.jpg</URL><Height
+        Units="pixels">281</Height><Width Units="pixels">500</Width></LargeImage></ImageSet><ImageSet
+        Category="variant"><SwatchImage><URL>http://ecx.images-amazon.com/images/I/51HPjH8hNvL._SL30_.jpg</URL><Height
+        Units="pixels">17</Height><Width Units="pixels">30</Width></SwatchImage><SmallImage><URL>http://ecx.images-amazon.com/images/I/51HPjH8hNvL._SL75_.jpg</URL><Height
+        Units="pixels">42</Height><Width Units="pixels">75</Width></SmallImage><ThumbnailImage><URL>http://ecx.images-amazon.com/images/I/51HPjH8hNvL._SL75_.jpg</URL><Height
+        Units="pixels">42</Height><Width Units="pixels">75</Width></ThumbnailImage><TinyImage><URL>http://ecx.images-amazon.com/images/I/51HPjH8hNvL._SL110_.jpg</URL><Height
+        Units="pixels">62</Height><Width Units="pixels">110</Width></TinyImage><MediumImage><URL>http://ecx.images-amazon.com/images/I/51HPjH8hNvL._SL160_.jpg</URL><Height
+        Units="pixels">90</Height><Width Units="pixels">160</Width></MediumImage><LargeImage><URL>http://ecx.images-amazon.com/images/I/51HPjH8hNvL.jpg</URL><Height
+        Units="pixels">281</Height><Width Units="pixels">500</Width></LargeImage></ImageSet></ImageSets><ItemAttributes><Binding>Video
+        Game</Binding><Brand>Sony</Brand><CatalogNumberList><CatalogNumberListElement>0711719817628</CatalogNumberListElement><CatalogNumberListElement>98176</CatalogNumberListElement><CatalogNumberListElement>DH98176</CatalogNumberListElement></CatalogNumberList><EAN>0711719817628</EAN><EANList><EANListElement>0711719817628</EANListElement></EANList><Edition>Standard</Edition><ESRBAgeRating>Mature</ESRBAgeRating><Feature>Journey
+        as mankind's last hope, Joseph Capelli, across a devastated America, making
+        your way from Haven, Oklahoma to New York City</Feature><Feature>A fully loaded
+        arsenal of innovative weapons, including classics like the Bullseye, Auger
+        and a new weapon upgrade system</Feature><Feature>Fully featured offline and
+        online cooperative modes that let you share the experience</Feature><Feature>Engage
+        smarter and more agile Chimeran enemies and experience new, more focused,
+        progression-based multiplayer experience</Feature><Feature>Full PlayStation
+        3 game support</Feature><Genre>shooter_action_games</Genre><HardwarePlatform>Playstation
+        3</HardwarePlatform><IsAutographed>0</IsAutographed><IsEligibleForTradeIn>1</IsEligibleForTradeIn><IsMemorabilia>0</IsMemorabilia><ItemDimensions><Height
+        Units="hundredths-inches">59</Height><Length Units="hundredths-inches">669</Length><Weight
+        Units="hundredths-pounds">20</Weight><Width Units="hundredths-inches">539</Width></ItemDimensions><Label>Sony
+        Computer Entertainment</Label><Languages><Language><Name>English</Name><Type>Unknown</Type></Language><Language><Name>English</Name><Type>Manual</Type></Language><Language><Name>French</Name><Type>Manual</Type></Language></Languages><ListPrice><Amount>5999</Amount><CurrencyCode>USD</CurrencyCode><FormattedPrice>$59.99</FormattedPrice></ListPrice><Manufacturer>Sony
+        Computer Entertainment</Manufacturer><Model>98176</Model><MPN>98176</MPN><NumberOfDiscs>1</NumberOfDiscs><NumberOfItems>1</NumberOfItems><OperatingSystem>PlayStation
+        3</OperatingSystem><PackageDimensions><Height Units="hundredths-inches">55</Height><Length
+        Units="hundredths-inches">669</Length><Weight Units="hundredths-pounds">15</Weight><Width
+        Units="hundredths-inches">528</Width></PackageDimensions><PackageQuantity>1</PackageQuantity><PartNumber>98176</PartNumber><Platform>PlayStation
+        3</Platform><ProductGroup>Video Games</ProductGroup><ProductTypeName>CONSOLE_VIDEO_GAMES</ProductTypeName><Publisher>Sony
+        Computer Entertainment</Publisher><ReleaseDate>2011-09-06</ReleaseDate><Studio>Sony
+        Computer Entertainment</Studio><Title>Resistance 3</Title><TradeInValue><Amount>139</Amount><CurrencyCode>USD</CurrencyCode><FormattedPrice>$1.39</FormattedPrice></TradeInValue><UPC>711719817628</UPC><UPCList><UPCListElement>711719817628</UPCListElement></UPCList></ItemAttributes><OfferSummary><LowestNewPrice><Amount>983</Amount><CurrencyCode>USD</CurrencyCode><FormattedPrice>$9.83</FormattedPrice></LowestNewPrice><LowestUsedPrice><Amount>580</Amount><CurrencyCode>USD</CurrencyCode><FormattedPrice>$5.80</FormattedPrice></LowestUsedPrice><TotalNew>93</TotalNew><TotalUsed>97</TotalUsed><TotalCollectible>0</TotalCollectible><TotalRefurbished>0</TotalRefurbished></OfferSummary><Offers><TotalOffers>1</TotalOffers><TotalOfferPages>1</TotalOfferPages><MoreOffersUrl>http://www.amazon.com/gp/offer-listing/B003O6E67A%3FSubscriptionId%3DAKIAIX2FSICCF6LXY4VA%26tag%3Dassociate_tag%26linkCode%3Dxm2%26camp%3D2025%26creative%3D386001%26creativeASIN%3DB003O6E67A</MoreOffersUrl><Offer><OfferAttributes><Condition>New</Condition></OfferAttributes><OfferListing><OfferListingId>wRB6UosGaM08uxwA034WNCo93gUxdzN6wAM0syA3Ob%2BPIGNc9RdouoGzpQ2pHYsKh%2FnY2WMs56U7R%2BQZ%2B4hC%2FkzzDKpnstYuCmWofDtwQsuOGeNXc3CbfcDPS%2FdlDwJHMErbzU3x1WEK1i376AL8%2FA%3D%3D</OfferListingId><Price><Amount>1620</Amount><CurrencyCode>USD</CurrencyCode><FormattedPrice>$16.20</FormattedPrice></Price><AmountSaved><Amount>4379</Amount><CurrencyCode>USD</CurrencyCode><FormattedPrice>$43.79</FormattedPrice></AmountSaved><PercentageSaved>73</PercentageSaved><Availability>Usually
+        ships in 24 hours</Availability><AvailabilityAttributes><AvailabilityType>now</AvailabilityType><MinimumHours>0</MinimumHours><MaximumHours>0</MaximumHours></AvailabilityAttributes><IsEligibleForSuperSaverShipping>1</IsEligibleForSuperSaverShipping></OfferListing></Offer></Offers></Item></Items></ItemLookupResponse>
+    http_version: 
+  recorded_at: Tue, 17 Sep 2013 12:15:48 GMT
+recorded_with: VCR 2.5.0
