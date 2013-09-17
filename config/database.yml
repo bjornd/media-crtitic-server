@@ -25,4 +25,4 @@ production:
   encoding: utf8
   database: media_critic
   username: root
-  password:
+  password: toor
