@@ -15,7 +15,7 @@ class Api::SearchController < ApplicationController
         publisher: '.publisher .data',
         url: ['.product_title a', 'href']
       })
-    end
+    end.select { |item| item[:platform] != 'iOS' }
 
     render json: {success: true, data: results}
   end
