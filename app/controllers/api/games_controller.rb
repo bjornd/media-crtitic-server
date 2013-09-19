@@ -5,9 +5,9 @@ class Api::GamesController < ApplicationController
     if params[:id].length == 12
       search_params[:id_type] = 'UPC'
       search_params[:country] = 'us'
-    elsif (params[:id].length == 13)
-      search_params[:id_type] = 'EAN'
-      search_params[:country] = 'uk'
+    #elsif (params[:id].length == 13)
+    #  search_params[:id_type] = 'EAN'
+    #  search_params[:country] = 'uk'
     else
       render :json => {success: false}, :status => 404
       return
