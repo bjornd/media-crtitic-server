@@ -1,11 +1,11 @@
 class CachedPage < ActiveRecord::Base
   def CachedPage.get_html(url)
     page = CachedPage.where(url: url).first
-    if page.nil? || page.valid_until.nil? || page.valid_until > DateTime.now
+    if page.nil? || page.valid_until.nil? || page.valid_until < DateTime.now
       content = Net::HTTP.retrieve(url)
       return nil if content.nil?
       #some pages can contain invalid UTF-8 sequences
-      content = content.force_encoding("utf-8").encode("utf-8", "binary", :undef => :replace)
+      #content = content.force_encoding("utf-8").encode("utf-8", "binary", :undef => :replace)
       release_date = Date.parse(Nokogiri::HTML(content).at_css('.release_data .data').content)
 
       if page.nil?
