@@ -82,7 +82,7 @@ class Api::OffersController < ApplicationController
     if res.failure?
       render json: {success: false}, status: 404
     else
-      items = res.response["ItemArray"]["Item"].map do |item|
+      items = res.response["ItemArray"]["Item"][0..20].map do |item|
         if item["ListingType"] == 'Chinese'
           data = {
             type: 'auction',
