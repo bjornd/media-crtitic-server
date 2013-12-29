@@ -11,7 +11,7 @@ class Api::SearchControllerTest < ActionController::TestCase
        assert_response :success
        body = JSON.parse(@response.body)
        assert_equal body["success"], true
-       assert_equal body["data"].length, 6
+       assert_equal body["data"].length, 4
        assert_equal body["data"][0]["title"], 'Need for Speed: Shift'
        assert_equal body["data"][0]["score"], '83'
        assert_equal body["data"][0]["platform"], 'PC'
