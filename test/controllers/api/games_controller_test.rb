@@ -37,6 +37,8 @@ class Api::GamesControllerTest < ActionController::TestCase
        assert_equal body["data"]["platform"], "PlayStation 3"
        assert_equal body["data"]["metacritic_url"], "/game/playstation-3/resistance-3"
        assert_equal body["data"]["score"], "83"
+       assert_equal body["data"]["critic_reviews_total"], "91"
+       assert_equal body["data"]["user_score"], "7.7"
     end
   end
 

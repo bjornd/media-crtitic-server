@@ -67,7 +67,7 @@ class Api::OffersController < ApplicationController
 
   CURRENCIES = {
     'USD' => '$',
-    'GBP' => '£'
+    'GBP' => '\u00A3'
   }
 
   def list_ebay

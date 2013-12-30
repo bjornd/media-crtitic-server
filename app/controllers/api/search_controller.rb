@@ -9,7 +9,7 @@ class Api::SearchController < ApplicationController
     results = search_doc.css('.search_results .result').map do |result|
       result.extract({
         title: '.product_title a',
-        score: '.metascore',
+        score: '.metascore_w',
         platform: '.platform',
         release_date: '.release_date .data',
         publisher: '.publisher .data',

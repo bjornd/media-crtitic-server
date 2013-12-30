@@ -2,7 +2,7 @@
 http_interactions:
 - request:
     method: get
-    uri: http://ecs.amazonaws.com/onca/xml?AWSAccessKeyId=AKIAIX2FSICCF6LXY4VA&AssociateTag=associate_tag&IdType=UPC&ItemId=711719817628&Operation=ItemLookup&ResponseGroup=ItemAttributes,Offers,Images&SearchIndex=VideoGames&Signature=qBSDWKe9EK29g45/wT5E4EkPwSAUlyubTAqrrecH%2BUE=&Timestamp=2013-09-17T12:15:47Z
+    uri: http://ecs.amazonaws.com/onca/xml?AWSAccessKeyId=AKIAIX2FSICCF6LXY4VA&AssociateTag=associate_tag&IdType=UPC&ItemId=711719817628&Operation=ItemLookup&ResponseGroup=ItemAttributes,Offers,Images&SearchIndex=VideoGames&Signature=kc9tcsJT8AlK7LjV7e9fxWvmFTcwJIwaTTRsRfebBnQ=&Timestamp=2013-12-30T11:55:49Z
     body:
       encoding: US-ASCII
       string: ''
@@ -21,7 +21,7 @@ http_interactions:
       message: OK
     headers:
       Date:
-      - Tue, 17 Sep 2013 12:15:48 GMT
+      - Mon, 30 Dec 2013 11:55:50 GMT
       Server:
       - Server
       Content-Type:
@@ -35,14 +35,15 @@ http_interactions:
     body:
       encoding: UTF-8
       string: <?xml version="1.0" ?><ItemLookupResponse xmlns="http://webservices.amazon.com/AWSECommerceService/2011-08-01"><OperationRequest><HTTPHeaders><Header
-        Name="UserAgent" Value="Ruby"></Header></HTTPHeaders><RequestId>e8f3cb0d-3566-44c6-815c-01ccd1fd8349</RequestId><Arguments><Argument
-        Name="Operation" Value="ItemLookup"></Argument><Argument Name="AssociateTag"
-        Value="associate_tag"></Argument><Argument Name="SearchIndex" Value="VideoGames"></Argument><Argument
-        Name="Signature" Value="qBSDWKe9EK29g45/wT5E4EkPwSAUlyubTAqrrecH+UE="></Argument><Argument
-        Name="ItemId" Value="711719817628"></Argument><Argument Name="IdType" Value="UPC"></Argument><Argument
+        Name="UserAgent" Value="Ruby"></Header></HTTPHeaders><RequestId>268b604e-c184-4def-9f1e-e26c29427dc6</RequestId><Arguments><Argument
+        Name="Operation" Value="ItemLookup"></Argument><Argument Name="Signature"
+        Value="kc9tcsJT8AlK7LjV7e9fxWvmFTcwJIwaTTRsRfebBnQ="></Argument><Argument
+        Name="AssociateTag" Value="associate_tag"></Argument><Argument Name="ItemId"
+        Value="711719817628"></Argument><Argument Name="IdType" Value="UPC"></Argument><Argument
         Name="AWSAccessKeyId" Value="AKIAIX2FSICCF6LXY4VA"></Argument><Argument Name="Timestamp"
-        Value="2013-09-17T12:15:47Z"></Argument><Argument Name="ResponseGroup" Value="ItemAttributes,Offers,Images"></Argument><Argument
-        Name="Service" Value="AWSECommerceService"></Argument></Arguments><RequestProcessingTime>0.0417720000000000</RequestProcessingTime></OperationRequest><Items><Request><IsValid>True</IsValid><ItemLookupRequest><IdType>UPC</IdType><ItemId>711719817628</ItemId><ResponseGroup>ItemAttributes</ResponseGroup><ResponseGroup>Offers</ResponseGroup><ResponseGroup>Images</ResponseGroup><SearchIndex>VideoGames</SearchIndex><VariationPage>All</VariationPage></ItemLookupRequest></Request><Item><ASIN>B003O6E67A</ASIN><ParentASIN>B0055Q175G</ParentASIN><DetailPageURL>http://www.amazon.com/Resistance-3-Playstation/dp/B003O6E67A%3FSubscriptionId%3DAKIAIX2FSICCF6LXY4VA%26tag%3Dassociate_tag%26linkCode%3Dxm2%26camp%3D2025%26creative%3D165953%26creativeASIN%3DB003O6E67A</DetailPageURL><ItemLinks><ItemLink><Description>Technical
+        Value="2013-12-30T11:55:49Z"></Argument><Argument Name="ResponseGroup" Value="ItemAttributes,Offers,Images"></Argument><Argument
+        Name="SearchIndex" Value="VideoGames"></Argument><Argument Name="Service"
+        Value="AWSECommerceService"></Argument></Arguments><RequestProcessingTime>0.0348270000000000</RequestProcessingTime></OperationRequest><Items><Request><IsValid>True</IsValid><ItemLookupRequest><IdType>UPC</IdType><ItemId>711719817628</ItemId><ResponseGroup>ItemAttributes</ResponseGroup><ResponseGroup>Offers</ResponseGroup><ResponseGroup>Images</ResponseGroup><SearchIndex>VideoGames</SearchIndex><VariationPage>All</VariationPage></ItemLookupRequest></Request><Item><ASIN>B003O6E67A</ASIN><ParentASIN>B0055Q175G</ParentASIN><DetailPageURL>http://www.amazon.com/Resistance-3-Playstation/dp/B003O6E67A%3FSubscriptionId%3DAKIAIX2FSICCF6LXY4VA%26tag%3Dassociate_tag%26linkCode%3Dxm2%26camp%3D2025%26creative%3D165953%26creativeASIN%3DB003O6E67A</DetailPageURL><ItemLinks><ItemLink><Description>Technical
         Details</Description><URL>http://www.amazon.com/Resistance-3-Playstation/dp/tech-data/B003O6E67A%3FSubscriptionId%3DAKIAIX2FSICCF6LXY4VA%26tag%3Dassociate_tag%26linkCode%3Dxm2%26camp%3D2025%26creative%3D386001%26creativeASIN%3DB003O6E67A</URL></ItemLink><ItemLink><Description>Add
         To Baby Registry</Description><URL>http://www.amazon.com/gp/registry/baby/add-item.html%3Fasin.0%3DB003O6E67A%26SubscriptionId%3DAKIAIX2FSICCF6LXY4VA%26tag%3Dassociate_tag%26linkCode%3Dxm2%26camp%3D2025%26creative%3D386001%26creativeASIN%3DB003O6E67A</URL></ItemLink><ItemLink><Description>Add
         To Wedding Registry</Description><URL>http://www.amazon.com/gp/registry/wedding/add-item.html%3Fasin.0%3DB003O6E67A%26SubscriptionId%3DAKIAIX2FSICCF6LXY4VA%26tag%3Dassociate_tag%26linkCode%3Dxm2%26camp%3D2025%26creative%3D386001%26creativeASIN%3DB003O6E67A</URL></ItemLink><ItemLink><Description>Add
@@ -121,8 +122,8 @@ http_interactions:
         Units="hundredths-inches">528</Width></PackageDimensions><PackageQuantity>1</PackageQuantity><PartNumber>98176</PartNumber><Platform>PlayStation
         3</Platform><ProductGroup>Video Games</ProductGroup><ProductTypeName>CONSOLE_VIDEO_GAMES</ProductTypeName><Publisher>Sony
         Computer Entertainment</Publisher><ReleaseDate>2011-09-06</ReleaseDate><Studio>Sony
-        Computer Entertainment</Studio><Title>Resistance 3</Title><TradeInValue><Amount>139</Amount><CurrencyCode>USD</CurrencyCode><FormattedPrice>$1.39</FormattedPrice></TradeInValue><UPC>711719817628</UPC><UPCList><UPCListElement>711719817628</UPCListElement></UPCList></ItemAttributes><OfferSummary><LowestNewPrice><Amount>983</Amount><CurrencyCode>USD</CurrencyCode><FormattedPrice>$9.83</FormattedPrice></LowestNewPrice><LowestUsedPrice><Amount>580</Amount><CurrencyCode>USD</CurrencyCode><FormattedPrice>$5.80</FormattedPrice></LowestUsedPrice><TotalNew>93</TotalNew><TotalUsed>97</TotalUsed><TotalCollectible>0</TotalCollectible><TotalRefurbished>0</TotalRefurbished></OfferSummary><Offers><TotalOffers>1</TotalOffers><TotalOfferPages>1</TotalOfferPages><MoreOffersUrl>http://www.amazon.com/gp/offer-listing/B003O6E67A%3FSubscriptionId%3DAKIAIX2FSICCF6LXY4VA%26tag%3Dassociate_tag%26linkCode%3Dxm2%26camp%3D2025%26creative%3D386001%26creativeASIN%3DB003O6E67A</MoreOffersUrl><Offer><OfferAttributes><Condition>New</Condition></OfferAttributes><OfferListing><OfferListingId>wRB6UosGaM08uxwA034WNCo93gUxdzN6wAM0syA3Ob%2BPIGNc9RdouoGzpQ2pHYsKh%2FnY2WMs56U7R%2BQZ%2B4hC%2FkzzDKpnstYuCmWofDtwQsuOGeNXc3CbfcDPS%2FdlDwJHMErbzU3x1WEK1i376AL8%2FA%3D%3D</OfferListingId><Price><Amount>1620</Amount><CurrencyCode>USD</CurrencyCode><FormattedPrice>$16.20</FormattedPrice></Price><AmountSaved><Amount>4379</Amount><CurrencyCode>USD</CurrencyCode><FormattedPrice>$43.79</FormattedPrice></AmountSaved><PercentageSaved>73</PercentageSaved><Availability>Usually
-        ships in 24 hours</Availability><AvailabilityAttributes><AvailabilityType>now</AvailabilityType><MinimumHours>0</MinimumHours><MaximumHours>0</MaximumHours></AvailabilityAttributes><IsEligibleForSuperSaverShipping>1</IsEligibleForSuperSaverShipping></OfferListing></Offer></Offers></Item></Items></ItemLookupResponse>
+        Computer Entertainment</Studio><Title>Resistance 3 - Playstation 3</Title><TradeInValue><Amount>80</Amount><CurrencyCode>USD</CurrencyCode><FormattedPrice>$0.80</FormattedPrice></TradeInValue><UPC>711719817628</UPC><UPCList><UPCListElement>711719817628</UPCListElement></UPCList></ItemAttributes><OfferSummary><LowestNewPrice><Amount>1799</Amount><CurrencyCode>USD</CurrencyCode><FormattedPrice>$17.99</FormattedPrice></LowestNewPrice><LowestUsedPrice><Amount>389</Amount><CurrencyCode>USD</CurrencyCode><FormattedPrice>$3.89</FormattedPrice></LowestUsedPrice><TotalNew>54</TotalNew><TotalUsed>69</TotalUsed><TotalCollectible>0</TotalCollectible><TotalRefurbished>0</TotalRefurbished></OfferSummary><Offers><TotalOffers>1</TotalOffers><TotalOfferPages>1</TotalOfferPages><MoreOffersUrl>http://www.amazon.com/gp/offer-listing/B003O6E67A%3FSubscriptionId%3DAKIAIX2FSICCF6LXY4VA%26tag%3Dassociate_tag%26linkCode%3Dxm2%26camp%3D2025%26creative%3D386001%26creativeASIN%3DB003O6E67A</MoreOffersUrl><Offer><OfferAttributes><Condition>New</Condition></OfferAttributes><OfferListing><OfferListingId>C2ly5od4dcU4UbcYwMBFxzS06C0Uab%2Bips7p9WVPMDaZ6NUxdtAkGUBSSTcOg%2FZi7BGWlF7d%2FgdPvOSY0k8CACSkc3MTo5Y%2FT3E3aXqryeL0OZPzCVI0Mr7LoCrFtm0EY9vs4dz8DSCkr37eesPoRw%3D%3D</OfferListingId><Price><Amount>1920</Amount><CurrencyCode>USD</CurrencyCode><FormattedPrice>$19.20</FormattedPrice></Price><AmountSaved><Amount>4079</Amount><CurrencyCode>USD</CurrencyCode><FormattedPrice>$40.79</FormattedPrice></AmountSaved><PercentageSaved>68</PercentageSaved><Availability>Usually
+        ships in 1-2 business days</Availability><AvailabilityAttributes><AvailabilityType>now</AvailabilityType><MinimumHours>24</MinimumHours><MaximumHours>48</MaximumHours></AvailabilityAttributes><IsEligibleForSuperSaverShipping>0</IsEligibleForSuperSaverShipping></OfferListing></Offer></Offers></Item></Items></ItemLookupResponse>
     http_version: 
-  recorded_at: Tue, 17 Sep 2013 12:15:48 GMT
+  recorded_at: Mon, 30 Dec 2013 11:55:50 GMT
 recorded_with: VCR 2.5.0

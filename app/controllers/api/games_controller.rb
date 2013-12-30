@@ -183,8 +183,8 @@ class Api::GamesController < ApplicationController
     document.extract({
       title: '.content_head .product_title a',
       platform: '.content_head .platform a',
-      score: '.product_scores .metascore .score_value',
-      user_score: '.product_scores .avguserscore .score_value',
+      score: '.product_scores .metascore_summary span[itemprop=ratingValue]',
+      user_score: '.product_scores .feature_userscore .user',
       release_date: '.product_data .release_data .data',
       maturity_rating: '.product_details .product_rating .data',
       publisher: '.product_data .publisher .data a',
